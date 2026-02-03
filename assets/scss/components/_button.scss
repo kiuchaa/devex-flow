@@ -1,0 +1,27 @@
+// Button Component Styles
+.btn {
+  transition: all 0.3s ease !important;
+
+  &-light {
+    background-color: #F3F4F6;
+    border-color: #F3F4F6;
+    color: #1F2937;
+
+    &:hover {
+      background-color: #e5e7eb;
+      border-color: #e5e7eb;
+      transform: translateY(-2px);
+    }
+  }
+
+  &-dark {
+    background-color: #000;
+    border-color: #000;
+
+    &:hover {
+      background-color: #333;
+      border-color: #333;
+      transform: translateY(-2px);
+    }
+  }
+}

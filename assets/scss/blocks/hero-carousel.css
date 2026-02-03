@@ -1,0 +1,60 @@
+.b-hero-carousel {
+  background-color: var(--bs-white, #fff);
+  position: relative;
+}
+.b-hero-carousel .swiper {
+  width: 100%;
+  height: 100%;
+}
+.b-hero-carousel .swiper-slide {
+  display: flex;
+  align-items: center;
+}
+.b-hero-carousel h1 {
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+@media (min-width: 992px) {
+  .b-hero-carousel h1 {
+    font-size: 3.5rem;
+  }
+}
+.b-hero-carousel .lead {
+  color: #6c757d;
+}
+.b-hero-carousel .hero-carousel-image {
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 550px;
+  aspect-ratio: 4/3;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.b-hero-carousel .hero-carousel-image:hover {
+  transform: scale(1.03);
+}
+.b-hero-carousel .swiper-pagination-bullet-active {
+  background: var(--bs-dark, #212529);
+}
+.b-hero-carousel .swiper-button-next,
+.b-hero-carousel .swiper-button-prev {
+  color: var(--bs-dark, #212529);
+  background: rgba(255, 255, 255, 0.8);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+}
+.b-hero-carousel .swiper-button-next::after,
+.b-hero-carousel .swiper-button-prev::after {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .b-hero-carousel .swiper-button-next,
+  .b-hero-carousel .swiper-button-prev {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=hero-carousel.css.map */

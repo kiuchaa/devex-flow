@@ -1,0 +1,39 @@
+// Text & Image Block Styles
+
+.b-text-image {
+    padding: 5rem 0;
+
+    .b-text-image__content {
+        @media (min-width: 992px) {
+            padding-right: 3rem;
+        }
+    }
+
+    &.image-right {
+        .b-text-image__content {
+            @media (min-width: 992px) {
+                padding-right: 0;
+                padding-left: 3rem;
+            }
+        }
+    }
+
+    .b-text-image__image-wrapper {
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .display-5 {
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--bs-black);
+    }
+
+    .lead {
+        margin-bottom: 2rem;
+    }
+}

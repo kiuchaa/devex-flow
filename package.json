@@ -1,0 +1,26 @@
+{
+  "name": "pixel-flow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "sass --watch style.scss:style.css --load-path=. --quiet-deps --quiet",
+    "build": "sass style.scss:style.css --load-path=. --style compressed --quiet-deps --quiet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiuchaa/dx-pro-theme.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kiuchaa/dx-pro-theme/issues"
+  },
+  "homepage": "https://github.com/kiuchaa/dx-pro-theme#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "sass": "^1.97.3"
+  }
+}

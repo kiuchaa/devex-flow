@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+.sass-cache/
+npm-debug.log*
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Documentation
+# README.md (keep this)
+
+# Important:
+# Do NOT ignore the libs/ directory (contains Plugin Update Checker)
+# Do NOT ignore style.css (required for theme identity and PUC versioning)
+# Do NOT ignore style.css.map (optional, but helpful for debugging)

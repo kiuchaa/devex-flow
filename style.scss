@@ -1,0 +1,45 @@
+/*
+Theme Name: Pixel Flow
+Theme URI: https://pixelcreation.nl/
+Author: The Pixel Creation team
+Author URI: https://pixelcreation.nl/
+Description: The new advanced base theme built for maximum efficiency for Pixels.
+Tested up to: 8.2
+Requires PHP: 5.6
+Version: 0.1.1
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+Text Domain: pixel-flow
+*/
+
+// 1. Configuration and Variables
+@import "assets/scss/variables/index";
+
+// 2. Import Bootstrap (Minimal / Essential)
+// Adjust this list to include only what you use. 
+// Standard set for most responsive sites:
+@import "assets/scss/bootstrap/functions";
+@import "assets/scss/bootstrap/variables"; // Uses our overrides
+@import "assets/scss/bootstrap/maps";
+@import "assets/scss/bootstrap/mixins";
+@import "assets/scss/bootstrap/root";
+@import "assets/scss/bootstrap/utilities";
+@import "assets/scss/bootstrap/reboot";
+@import "assets/scss/bootstrap/type";
+@import "assets/scss/bootstrap/images";
+@import "assets/scss/bootstrap/containers";
+@import "assets/scss/bootstrap/grid";
+@import "assets/scss/bootstrap/buttons";
+@import "assets/scss/bootstrap/transitions";
+@import "assets/scss/bootstrap/helpers";
+@import "assets/scss/bootstrap/utilities/api";
+
+// define our local stylesheets
+@import "assets/scss/theme/theme";
+@import "assets/scss/components/components";
+@import "assets/scss/blocks/blocks";
+@import "assets/scss/sections/sections";
+@import "assets/scss/helpers/helpers";
+
+// final override for fine-tuning styling (maatwerk here)
+@import "assets/scss/custom/custom";

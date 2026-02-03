@@ -1,0 +1,126 @@
+/*
+ * Pixel CMS Admin Color Scheme
+ */
+
+:root {
+    --pixel-primary: #0d7846;
+    --pixel-primary-hover: #13834f;
+    --pixel-primary-active: #117546;
+}
+
+/* Links */
+a {
+    color: var(--pixel-primary);
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: var(--pixel-primary-hover);
+}
+
+/* Admin Menu */
+#adminmenu,
+#adminmenu .wp-submenu,
+#adminmenuwrap,
+#adminmenuback {
+    background-color: var(--pixel-primary);
+}
+
+#adminmenu a {
+    color: #eee;
+}
+
+#adminmenu div.wp-menu-image:before {
+    color: white;
+    background-color: var(--pixel-primary);
+}
+
+#adminmenu a:hover,
+#adminmenu li.menu-top:hover,
+#adminmenu li.opensub>a.menu-top,
+#adminmenu li>a.focus {
+    color: #fff;
+    background-color: var(--pixel-primary-hover);
+}
+
+#adminmenu li.menu-top:hover div.wp-menu-image:before,
+#adminmenu li.opensub>a.menu-top div.wp-menu-image:before {
+    color: #fff;
+    background-color: var(--pixel-primary-hover);
+}
+
+/* Active Menu Item */
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
+#adminmenu li.current a.menu-top,
+#adminmenu .wp-menu-image:before,
+#adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head,
+#adminmenu .wp-menu-arrow,
+#adminmenu .wp-menu-arrow div {
+    background-color: var(--pixel-primary-active);
+    color: #fff;
+}
+
+#adminmenu li.wp-has-current-submenu .wp-submenu {
+    background-color: #32373c;
+}
+
+#adminmenu .wp-submenu a {
+    color: #eee;
+}
+
+#adminmenu .wp-submenu a:hover,
+#adminmenu .wp-submenu a:focus {
+    color: #ccc;
+}
+
+#adminmenu .wp-submenu li.current a,
+#adminmenu .wp-submenu li.current a:hover,
+#adminmenu .wp-submenu li.current a:focus {
+    color: #fff;
+}
+
+/* Admin Bar */
+#wpadminbar {
+    background: var(--pixel-primary);
+}
+
+#wpadminbar .ab-item,
+#wpadminbar a.ab-item,
+#wpadminbar>#wp-toolbar span.ab-label,
+#wpadminbar>#wp-toolbar span.noticon {
+    color: #eee;
+}
+
+#wpadminbar .ab-top-menu>li:hover>.ab-item,
+#wpadminbar .ab-top-menu>li.hover>.ab-item,
+#wpadminbar .ab-top-menu>li>.ab-item:focus,
+#wpadminbar.nojq .quicklinks .ab-top-menu>li>.ab-item:focus,
+#wpadminbar-menu {
+    color: #fff;
+    background: var(--pixel-primary-hover);
+}
+
+/* Primary Buttons */
+.wp-core-ui .button-primary {
+    background: var(--pixel-primary);
+    border-color: var(--pixel-primary-hover);
+    color: #fff;
+}
+
+.wp-core-ui .button-primary:hover,
+.wp-core-ui .button-primary:focus {
+    background: #159358;
+    border-color: #117546;
+    color: #fff;
+}
+
+/* Login Page (if applicable) */
+.login h1 a {
+    color: var(--pixel-primary);
+}
+
+.wp-core-ui .button-primary {
+    box-shadow: none;
+    text-shadow: none;
+}
