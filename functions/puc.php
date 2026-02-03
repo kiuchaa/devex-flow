@@ -8,8 +8,8 @@ require_once get_template_directory() . '/libs/plugin-update-checker/plugin-upda
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
-    'https://github.com/kiuchaa/devex-theme',
-    get_template_directory() . '/style.css',
+    'https://github.com/kiuchaa/devex-flow',
+    get_template_directory() . '/style.scss',
     get_template() // This automatically gets the current folder name
 );
 

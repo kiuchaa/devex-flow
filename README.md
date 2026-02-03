@@ -64,18 +64,12 @@ Zodra je klaar bent om je wijzigingen te pushen:
 
 1.  **Compileer de CSS**: Zorg ervoor dat de File Watcher jouw wijzigingen heeft doorgevoerd aan de `style.css` in de thema root folder.
 2.  **Verhoog de Versie**: Pas het versienummer aan bovenaan in `assets/scss/style.scss`. De build zorgt dat dit ook in de root `style.css` komt te staan.
-3.  **Commit & Push**: Commit **zowel** de bronbestanden (`.scss`) als de gecompileerde `style.css`.
-    ```bash
-    git add .
-    git commit -m "Beschrijving van je wijziging"
-    git push origin main
-    ```
-4.  **Maak een Release (Optioneel maar aanbevolen)**: Maak een nieuwe Git tag aan zodat PUC de update direct herkent.
-    ```bash
-    git tag v0.1.x
-    git push origin main --tags
-    ```
-
+3. **Git Workflow & OTA Updates**: Wij gebruiken een gestructureerd model om de stabiliteit van klantwebsites te garanderen terwijl de ontwikkelsnelheid hoog blijft. De Plugin Update Checker (PUC) monitort de main branch voor nieuwe tags om updates te pushen.
+   - Main Branch: De stabiele bron van waarheid. Zodra een versie-tag naar deze branch wordt gepusht, wordt de update direct beschikbaar voor alle klantensites via OTA. 
+   - Develop Branch: De primaire integratiebranch voor nieuwe features. Hier vindt de dagelijkse ontwikkeling plaats voordat deze naar een release gaat. 
+   - Feature Branches (feature/*): Geïsoleerde branches voor specifieke componenten of optimalisaties; deze worden uiteindelijk gemerged naar develop. 
+   - Hotfix Branches (hotfix/*): Noodoplossingen die direct vanaf main worden afgesplitst om direct een performance-fix te pushen zonder onvoltooide functies uit develop mee te nemen.
+4. **Develop PR naar Main**: Wanneer een PR is gemerged naar main, maak dan via het web-ui van Git een nieuwe release aan, dit wordt vervolgens gedetecteerd door PUC, en maakt het mogelijk voor elke klant met deze thema om te updaten.
 ## Belangrijke regels
 - **Bewerk NOOIT de root `style.css` direct**. Je wijzigingen gaan verloren bij de volgende build.
 - **Gooi de `libs/` map niet weg**. Hierin staat de code voor de automatische updates.
