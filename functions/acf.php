@@ -84,6 +84,41 @@ function register_pixel_flow_blocks() {
 				'mode'   => false,
 			]
 		]);
+
+		// Post Type Carousel Block
+		acf_register_block_type([
+			'name'            => 'post-type-carousel',
+			'title'           => __( 'Post Type Carousel', 'pixel-flow' ),
+			'render_template' => 'acf-blocks/post-type-carousel.php',
+			'category'        => 'custom_blocks',
+			'icon'            => 'slides',
+			'keywords'        => [ 'carousel', 'posts', 'slider', 'agenda' ],
+			'mode'            => 'edit',
+			'supports'        => [
+				'align'  => false,
+				'mode'   => false,
+				'anchor' => true,
+			]
+		]);
 	}
 }
 add_action( 'acf/init', 'register_pixel_flow_blocks' );
+
+/**
+ * Populate an ACF select field with all public post types.
+ */
+add_filter('acf/load_field/name=post_type', function($field) {
+    // Clear any manual choices set in the UI
+    $field['choices'] = array();
+
+    // Get all public post types as objects
+    $post_types = get_post_types(array('public' => true), 'objects');
+
+    // Loop through post types and add to choices array
+    // Value = post type slug (e.g., 'page'), Label = post type name (e.g., 'Pages')
+    foreach ($post_types as $post_type) {
+        $field['choices'][$post_type->name] = $post_type->label;
+    }
+
+    return $field;
+});

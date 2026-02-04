@@ -3,14 +3,16 @@
  */
 
 :root {
-    --pixel-primary: #0d7846;
-    --pixel-primary-hover: #13834f;
-    --pixel-primary-active: #117546;
+    --pixel-primary: #00432b;
+    --pixel-primary-hover: #002c1e;
+    --pixel-primary-active: #00432b;
+
+    --pixel-accent: #19A463;
 }
 
 /* Links */
 a {
-    color: var(--pixel-primary);
+    color: var(--pixel-accent);
 }
 
 a:hover,
@@ -110,8 +112,8 @@ a:focus {
 
 .wp-core-ui .button-primary:hover,
 .wp-core-ui .button-primary:focus {
-    background: #159358;
-    border-color: #117546;
+    background: var(--pixel-primary);
+    border-color: var(--pixel-primary);
     color: #fff;
 }
 

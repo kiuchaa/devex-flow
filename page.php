@@ -15,18 +15,14 @@
 get_header();
 ?>
 
-<div class="row">
-    <div class="col-12">
-        <?php
-        while ( have_posts() ) :
-            the_post();
+<?php
+while ( have_posts() ) :
+    the_post();
 
-            the_content();
+    the_content();
 
-        endwhile; // End of the loop.
-        ?>
-    </div>
-</div>
+endwhile; // End of the loop.
+?>
 
 <?php
 get_footer();

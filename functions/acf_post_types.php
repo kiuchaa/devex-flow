@@ -104,5 +104,3 @@ function medewerkers_post_type() {
     register_post_type( 'medewerkers', $args );
 }
 add_action( 'init', 'medewerkers_post_type', 0 );
-
-
