@@ -1,29 +1,31 @@
 // Navigation Styles
 .main-navigation {
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: #ffffff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
     transition: all 0.3s ease;
 
     &.scrolled {
-        background-color: rgba(255, 255, 255, 0.95);
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
     }
 
     .navbar-brand {
         font-weight: 700;
+        font-size: 1.25rem;
         letter-spacing: -0.02em;
-        color: var(--bs-dark);
-        width: 75px;
+        color: #000;
+        text-decoration: none;
 
-        img {
-          height: 75px;
-          width: 75px;
+        img,
+        .logo-placeholder {
+            height: 45px;
+            width: 120px;
+        }
+
+        .brand-text {
+            line-height: 1;
         }
     }
 
@@ -37,20 +39,209 @@
     }
 
     .navbar-nav {
-        .menu-item  {
-            a {
+        margin-top: 1rem;
+
+        @media (min-width: 992px) {
+            margin-top: 0;
+        }
+
+        .menu-item,
+        .nav-item {
+
+            a,
+            .nav-link {
                 font-weight: 500;
-                color: var(--bs-gray-600);
-                padding: 0 1rem;
+                font-size: 1rem; // Increased
+                color: #6B7280; // Gray-500 equivalent
+                padding: 0.5rem 1.25rem;
                 transition: color 0.2s ease;
-                position: relative;
                 text-decoration: none;
 
                 &:hover,
                 &.active,
-                &.current-menu-item {
-                    color: var(--bs-primary);
+                &.current-menu-item,
+                &.show {
+                    color: #111827; // Gray-900 equivalent
                 }
+            }
+        }
+
+        .dropdown-menu {
+            border: none;
+            border-top: 3px solid var(--bs-primary);
+            padding: 0.5rem 0; // Added standard padding
+
+            .h6 {
+                font-weight: 700;
+                letter-spacing: -0.01em;
+                font-size: 1.8rem;
+                color: #111827;
+                margin-bottom: 0.75rem;
+            }
+
+            ul {
+                padding-left: 0;
+            }
+
+            a {
+                line-height: 1.6;
+                color: #4B5563;
+                display: block;
+                padding: 0.25rem 1rem; // Added horizontal padding for items
+                transition: all 0.2s ease;
+
+                &:hover {
+                    color: var(--bs-primary);
+                    text-decoration: none;
+                    transform: translateX(4px);
+                }
+            }
+
+            @media (min-width: 992px) {
+                display: block;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+                pointer-events: none; // Prevent clicking while hidden
+
+                &.show {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                    pointer-events: auto;
+                }
+            }
+        }
+    }
+
+    .nav-cta {
+        .btn {
+            font-size: 1rem;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+    }
+
+    // Mobile Responsive Styles
+    @media (max-width: 991.98px) {
+
+        .navbar-brand,
+        .navbar-toggler {
+            z-index: 1052 !important; // Higher than overlay
+            position: relative;
+        }
+
+        .navbar-collapse {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100vh !important;
+            min-height: 100vh !important;
+            background-color: #ffffff !important;
+            z-index: 1050; // Overlay
+            padding: 85px 1.5rem 2rem 1.5rem !important; // Clear header
+            overflow-y: auto;
+            border-top: none !important;
+            display: block !important; // Force block to override BS display:none
+
+            // Hide by default using transform/opacity instead of display
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+
+            &.show,
+            &.collapsing {
+                transform: translateX(0);
+                opacity: 1;
+                visibility: visible;
+                height: 100vh !important; // Override BS collapsing height animation
+            }
+        }
+
+        .navbar-nav {
+            width: 100%;
+            margin: 0 !important;
+            align-items: flex-start !important;
+
+            .nav-item {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+                width: 100%;
+                text-align: left;
+
+                .nav-link {
+                    font-size: 1.25rem;
+                    padding: 1rem 0;
+                    color: #111827;
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        }
+
+        // Mobile Mega Menu
+        .dropdown-menu {
+            box-shadow: none !important;
+            border: none !important;
+            background: transparent !important;
+            padding: 0 0 1rem 0 !important;
+            margin: 0 !important;
+
+            .container {
+                padding: 0 !important;
+                max-width: 100% !important;
+            }
+
+            .row {
+                margin: 0 !important;
+            }
+
+            .col-12 {
+                margin-bottom: 1rem;
+                padding: 0 !important;
+            }
+
+            // Section Headers (using specific class from Walker)
+            .mega-menu-title {
+                font-size: 1.4rem !important;
+                color: var(--bs-primary);
+                font-weight: 700;
+                margin-bottom: 0.25rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                text-align: left;
+            }
+
+            a {
+                color: #555;
+                padding: 0.35rem 0;
+                display: block; // Ensure block for clicks
+
+                &:hover {
+                    color: #000;
+                    transform: none;
+                }
+            }
+        }
+
+        // Mobile CTA
+        .nav-cta {
+            margin-top: 2rem !important;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start !important;
+
+            .btn {
+                width: 100%;
+                display: block;
+                text-align: center;
+                padding: 0.75rem;
+                font-size: 1.1rem;
             }
         }
     }

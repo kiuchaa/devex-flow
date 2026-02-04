@@ -1,21 +1,21 @@
 <TaskOptions>
   <TaskOptions>
-    <option name="arguments" value="$ProjectFileDir$/assets/scss/style.scss:$ProjectFileDir$/style.css --quiet-deps --quiet" />
-    <option name="checkSyntaxErrors" value="true" />
+    <option name="arguments" value="run build" />
+    <option name="checkSyntaxErrors" value="false" />
     <option name="description" />
     <option name="exitCodeBehavior" value="ERROR" />
     <option name="fileExtension" value="scss" />
     <option name="immediateSync" value="true" />
-    <option name="name" value="SCSS" />
+    <option name="name" value="Gulp SCSS" />
     <option name="output" value="$ProjectFileDir$/style.css" />
     <option name="outputFilters">
       <array />
     </option>
     <option name="outputFromStdout" value="false" />
-    <option name="program" value="sass" />
+    <option name="program" value="/opt/homebrew/bin/npm" />
     <option name="runOnExternalChanges" value="true" />
     <option name="scopeName" value="Project Files" />
-    <option name="trackOnlyRoot" value="true" />
+    <option name="trackOnlyRoot" value="false" />
     <option name="workingDir" value="$ProjectFileDir$" />
     <envs />
   </TaskOptions>

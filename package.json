@@ -1,11 +1,11 @@
 {
   "name": "pixel-flow",
   "version": "1.0.0",
-  "description": "",
+  "description": "Welkom bij de **Pixel Flow Theme**. Dit is een geavanceerd WordPress base-theme, ontworpen voor maximale efficiëntie, modulariteit en automatische updates via GitHub.",
   "main": "index.js",
   "scripts": {
-    "dev": "sass --watch style.scss:style.css --load-path=. --quiet-deps --quiet",
-    "build": "sass style.scss:style.css --load-path=. --style compressed --quiet-deps --quiet"
+    "dev": "gulp watch",
+    "build": "gulp compile-scss"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,12 @@
   },
   "homepage": "https://github.com/kiuchaa/dx-pro-theme#readme",
   "dependencies": {
-    "bootstrap": "^5.3.8",
+    "bootstrap": "^5.3.8"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.1",
+    "gulp-sass": "^6.0.1",
+    "gulp-sass-glob": "^1.1.0",
     "sass": "^1.97.3"
   }
 }

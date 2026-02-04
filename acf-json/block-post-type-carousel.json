@@ -1,0 +1,89 @@
+{
+    "key": "group_block_post_type_carousel",
+    "title": "Blok: Post Type Carousel",
+    "fields": [
+        {
+            "key": "field_ptc_label",
+            "label": "Label",
+            "name": "label",
+            "type": "text",
+            "instructions": "Kleine tekst boven de titel (bijv. Agenda)",
+            "required": 0,
+            "default_value": "Agenda"
+        },
+        {
+            "key": "field_ptc_title",
+            "label": "Titel",
+            "name": "title",
+            "type": "text",
+            "instructions": "Hoofdtitel",
+            "required": 0,
+            "default_value": "Aankomende evenementen"
+        },
+        {
+            "key": "field_ptc_text",
+            "label": "Tekst",
+            "name": "text",
+            "type": "textarea",
+            "instructions": "Beschrijvende tekst",
+            "required": 0,
+            "rows": 3,
+            "new_lines": "br"
+        },
+        {
+            "key": "field_ptc_cta_link",
+            "label": "Knop",
+            "name": "cta_link",
+            "type": "link",
+            "instructions": "Link voor de knop (bijv. Volledige agenda)",
+            "required": 0,
+            "return_format": "array"
+        },
+        {
+            "key": "field_ptc_post_type",
+            "label": "Post Type",
+            "name": "post_type",
+            "type": "post_type",
+            "instructions": "Selecteer het post type om weer te geven",
+            "required": 0,
+            "default_value": "post"
+        },
+        {
+            "key": "field_ptc_limit",
+            "label": "Aantal",
+            "name": "limit",
+            "type": "number",
+            "instructions": "Aantal items om weer te geven (Max 10)",
+            "required": 0,
+            "default_value": 6,
+            "min": 1,
+            "max": 10
+        },
+        {
+            "key": "field_ptc_date_format",
+            "label": "Datum opmaak",
+            "name": "date_format",
+            "type": "text",
+            "instructions": "PHP Datum formaat (bijv. d M Y)",
+            "required": 0,
+            "default_value": "d M Y",
+            "placeholder": "d M Y"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/post-type-carousel"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "A carousel of items from a specific post type."
+}

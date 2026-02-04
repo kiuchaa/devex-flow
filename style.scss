@@ -5,7 +5,6 @@ Author: The Pixel Creation team
 Author URI: https://pixelcreation.nl/
 Description: The new advanced base theme built for maximum efficiency for Pixels.
 Tested up to: 8.2
-Requires PHP: 5.6
 Version: 0.1.2
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -30,6 +29,12 @@ Text Domain: pixel-flow
 @import "assets/scss/bootstrap/containers";
 @import "assets/scss/bootstrap/grid";
 @import "assets/scss/bootstrap/buttons";
+@import "assets/scss/bootstrap/forms";
+@import "assets/scss/bootstrap/nav";
+@import "assets/scss/bootstrap/navbar";
+@import "assets/scss/bootstrap/dropdown";
+@import "assets/scss/bootstrap/close";
+@import "assets/scss/bootstrap/offcanvas";
 @import "assets/scss/bootstrap/transitions";
 @import "assets/scss/bootstrap/helpers";
 @import "assets/scss/bootstrap/utilities/api";
@@ -37,7 +42,8 @@ Text Domain: pixel-flow
 // define our local stylesheets
 @import "assets/scss/theme/theme";
 @import "assets/scss/components/components";
-@import "assets/scss/blocks/blocks";
+// @import "assets/scss/blocks/blocks";
+@import "assets/scss/blocks/**/*.scss";
 @import "assets/scss/sections/sections";
 @import "assets/scss/helpers/helpers";
 

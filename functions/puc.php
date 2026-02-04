@@ -12,6 +12,3 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
     get_template_directory() . '/style.css',
     get_template() // This automatically gets the current folder name
 );
-
-// Set the branch that contains the stable release.
-$myUpdateChecker->setBranch('main');

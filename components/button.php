@@ -1,8 +1,11 @@
 <?php
 /**
- * Button Component.
+ * Button Component
  *
- * @package pixel-flow
+ * $link - The target URL, defined by ACF Link (return type array[])
+ * $variant - can be primary or secondary, or any other defined in _button.scss
+ * $class - the class override, you can call this if you want one button to look a bit different
+ * $size - the size of the button
  */
 
 $link    = $args['link'] ?? null;
@@ -17,7 +20,7 @@ $url    = $link['url'];
 $title  = $link['title'];
 $target = $link['target'] ?: '_self';
 
-$button_classes = 'btn rounded-pill px-4 py-3 fw-semibold ';
+$button_classes = 'btn fw-semibold ';
 
 if ( $variant === 'secondary' ) {
 	$button_classes .= 'btn-light text-dark';

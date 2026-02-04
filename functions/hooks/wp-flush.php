@@ -56,3 +56,11 @@ function remove_screen_options() {
     remove_meta_box('dashboard_right_now', 'dashboard', 'normal');
     remove_meta_box('dashboard_activity', 'dashboard', 'normal'); // Required for WordPress 3.8+
 }
+
+/**
+ * Remove the default 'Berichten' (Posts) menu from the dashboard.
+ */
+add_action( 'admin_menu', function() {
+    // 'edit.php' is the slug for the default WordPress Posts
+    remove_menu_page( 'edit.php' );
+});

@@ -48,13 +48,18 @@ function pf_create_default_menus() {
     set_theme_mod('nav_menu_locations', $locations);
 }
 
+/**
+ * Removes the Ninja Form default styling
+ */
 add_action('nf_display_enqueue_scripts', 'ninjaforms_deregister_styles');
 function ninjaforms_deregister_styles()
 {
     wp_dequeue_style('nf-font-awesome');
 }
 
-
+/**
+ * Registering our scripts
+ */
 function include_scripts()
 {
     wp_deregister_script('jquery');
@@ -79,7 +84,7 @@ function include_scripts()
     wp_enqueue_script('bootstrap');
 
     // Swiper
-    wp_register_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js', ['jquery'], null, true);
+    wp_register_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', ['jquery'], null, true);
     wp_enqueue_script('swiper');
 
     // AOS
@@ -90,17 +95,20 @@ function include_scripts()
     wp_enqueue_script('pixel-flow-app');
 }
 
-// Include styles in header
+/**
+ * Registering our stylesheets
+ * TODO: Keep in mind that our style.css uses versioning, change ilemtime to null to prevent this cache busting
+ */
 function include_header_styles()
 {
     // Enqueue theme assets
-    wp_register_style( 'pixel-flow-app', get_template_directory_uri() . '/style.css', array(), null );
+    wp_register_style( 'pixel-flow-app', get_template_directory_uri() . '/style.css', array(), filemtime(get_template_directory() . '/style.css') );
     wp_enqueue_style( 'pixel-flow-app' );
 
-    wp_register_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', [], null);
-    wp_enqueue_style('bootstrap');
+    // wp_register_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', [], null);
+    // wp_enqueue_style('bootstrap');
 
-    wp_register_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css', [], null);
+    wp_register_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', [], null);
     wp_enqueue_style('swiper');
 
     wp_register_style('aos', 'https://unpkg.com/aos@2.3.1/dist/aos.css', [], null);
@@ -110,18 +118,27 @@ function include_header_styles()
     wp_enqueue_style('fontawesome');
 }
 
-
-
-// Only queue scripts and styles on front end
+/**
+ * Only enqueue our scripts and stylesheet on the front-end, leaving the CMS as it is.
+ */
 if (!is_admin()) {
     // Counter intuitively, enqueue scripts is also the right hook to enqueue styles
     add_action('wp_enqueue_scripts', 'include_scripts');
     add_action('wp_enqueue_scripts', 'include_header_styles');
 }
 
-add_action('wp_dashboard_setup', 'my_custom_dashboard_widget');
+/**
+ * Enqueue assets for the Block Editor
+ */
+function include_editor_assets() {
+    wp_enqueue_script('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', [], null, true);
+    wp_enqueue_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', [], null);
+}
+add_action('enqueue_block_editor_assets', 'include_editor_assets');
 
-// Allow SVG upload for administrators
+/**
+ * Allow admins to upload SVGs without an external plug-in
+ */
 add_filter( 'upload_mimes', function ( $mimes ) {
     if ( ! current_user_can( 'administrator' ) ) {
         return $mimes;
@@ -131,28 +148,60 @@ add_filter( 'upload_mimes', function ( $mimes ) {
     return $mimes;
 } );
 
-// Alter the CMS color scheme to "Pixel Green"
+/**
+ * Alter the CMS color to Pixel Green - looks at the stylesheet in /assets/misc/
+ */
 add_action('admin_init', function() {
     wp_admin_css_color(
         'pixel-cms',
         __('Pixel CMS'),
-        get_template_directory_uri() . '/assets/pixel-cms.css', // Path to your CSS file
-        array('#19A463', '#fff', '#159358', '#117546') // Preview icon colors
+        get_template_directory_uri() . '/assets/misc/pixel-cms.css',
+        array( '#002F34', '#555', '#777', '#999' )
     );
 });
 
 add_filter('get_user_option_admin_color', function($color_scheme) {
-    return 'pixel-cms'; // Options: fresh (default), light, blue, coffee, ectoplasm, midnight, ocean, sunrise
+    return 'pixel-cms';
 }, 10, 1);
 
-// Adding a custom Dashboard widget with our custom instructions.
+/**
+ * Our custom Dashboard widget
+ */
 function my_custom_dashboard_widget() {
     global $wp_meta_boxes;
     wp_add_dashboard_widget('custom_help_widget', 'My Custom Block', 'custom_dashboard_help');
 }
+add_action('wp_dashboard_setup', 'my_custom_dashboard_widget');
 
 function custom_dashboard_help() {
     echo '<p>Welcome to your custom dashboard block! Add any HTML or PHP here.</p>';
 }
 
+/**
+ * Swaps out the Wordpress logo top left to our Pixel P
+ */
+function pixel_flow_custom_admin_logo() {
+    echo '
+    <style type="text/css">
+        #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
+            background-image: url(' . get_template_directory_uri() . '/assets/img/pixel-p-white.svg) !important;
+            background-position: center !important;
+            background-size: contain !important;
+            background-repeat: no-repeat !important;
+            color: transparent !important;
+            content: "" !important;
+            display: block !important;
+            width: 20px !important;
+            height: 20px !important;
+        }
+        #wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon {
+            width: 20px !important;
+            height: 20px !important;
+            margin-right: 0 !important;
+        }
+    </style>
+    ';
+}
+add_action('admin_head', 'pixel_flow_custom_admin_logo');
+add_action('wp_head', 'pixel_flow_custom_admin_logo');
 

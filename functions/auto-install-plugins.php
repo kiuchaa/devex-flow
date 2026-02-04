@@ -20,6 +20,11 @@ function pf_register_required_plugins() {
 			'force_activation'   => false,
 			'force_deactivation' => false,
 		),
+        array(
+            'name'     => 'Post Types Order',
+            'slug'     => 'post-types-order',
+            'required' => true,
+        ),
 		array(
 			'name'     => 'Ninja Forms',
 			'slug'     => 'ninja-forms',

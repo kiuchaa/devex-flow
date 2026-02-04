@@ -43,23 +43,37 @@ pixel-flow/
 └── .gitignore               # Zorgt dat node_modules niet in Git komen
 ```
 
-## Bijdragen als Developer (op het juiste manier)
+## Bijdragen als Developer (op de juiste manier)
 
-Om ervoor te zorgen dat updates correct worden doorgegeven aan alle sites, moet je deze workflow volgen:
+Om ervoor te zorgen dat updates correct worden doorgegeven aan alle sites, moet je deze workflow volgen.
 
-### 1. Voorbereiding
-Het is geadviseerd om gebruik te maken van PHPStorm, een IDE die wij met z'n allen gebruiken.
+### 1. Vereisten & Installatie
+Dit thema gebruikt een moderne build-tool (Gulp) om SCSS te compileren, wat sneller en beter werkt dan standaard Sass watchers.
+*   **Node.js & NPM**: Zorg dat je Node.js geïnstalleerd hebt.
+*   **Installatie**: Run `npm install` in de thema-root om de benodigde tools (Gulp, Sass, en plugins) te installeren.
+    *   *Belangrijk*: De `node_modules` map wordt **niet** naar de productieserver gepusht (zie `.gitignore`). Deze is enkel bedoeld voor lokale ontwikkeling om jouw SCSS bestanden te compileren naar één correcte `style.css` die wel op de server komt.
 
-Zorg dat er een correcte file-watcher is ingesteld. Gebruik hiervoor de PHPStorm's import file watcher; selecteer .tools/watchers.xml
-- Dit is belangrijk omdat het style.scss moet schrijven naar het bestand CSS in de root folder van een thema.
+### 2. IDE Configuratie (PHPStorm)
+Wij gebruiken een uniforme instelling voor PHPStorm om automatisch te compileren bij het opslaan. Dit zorgt ervoor dat de output accuraat genereerd wordt via Gulp.
+1.  Ga naar **Settings / Preferences** > **Tools** > **File Watchers**.
+2.  Klik op het import-icoon (pijltje omhoog/mapje).
+3.  Selecteer het bestand `.tools/watchers.xml` uit dit project.
+4.  Zorg dat de "Gulp SCSS" watcher is ingeschakeld.
+    *   *Let op*: Controleer of het pad naar 'Program' (npm) klopt voor jouw systeem (bijv. Windows vs Mac).
 
-### 2. Ontwikkeling & Styling
-Bewerk alleen bestanden in de `assets/scss/` map. Wij splitsen onze (S)CSS logica, met de volgende guidelines:
-- Global / Theme: `themes/_theme.scss` voor algemene zaken zoals body styling, links, of utility klassen die overal op de site worden gebruikt
-- Variables: kijkt naar de kleuren die zijn gedefinieërd in het CMS, een manual override is mogelijk via `variables/_theme.scss`
-- Nieuwe modules: maak je een nieuwe component aan? Maak dan een nieuwe component.scss aan via `components/my-new-component.scss`. Importeer deze dan in `components/_components.scss` met `@import "my-new-component";`
+### 3. Ontwikkeling & Styling
+Bewerk alleen bestanden in de `assets/scss/` map. Je kunt tijdens het ontwikkelen ook `npm run dev` in je terminal draaien voor een continue watch-taak.
 
-### 3. Build & Versiebeheer (Cruciaal voor PUC)
+Wij splitsen onze logica als volgt:
+- **Global**: `themes/_theme.scss` voor algemene zaken (body, typography).
+- **Variables**: `variables/` voor CMS kleuren en instellingen.
+- **Blocks (Auto-Import)**:
+    - Plaats bestanden in `assets/scss/blocks/`.
+    - **Nieuw!** Alle bestanden in deze map worden **automatisch** ingeladen via Gulp. Je hoeft dus géén `@import` meer toe te voegen.
+- **Components (Manual Import)**:
+    - Componenten in `components/` moeten nog wel handmatig geregistreerd worden in `components/_components.scss`.
+
+### 4. Build & Versiebeheer (Cruciaal voor PUC)
 Zodra je klaar bent om je wijzigingen te pushen:
 
 1.  **Compileer de CSS**: Zorg ervoor dat de File Watcher jouw wijzigingen heeft doorgevoerd aan de `style.css` in de thema root folder.

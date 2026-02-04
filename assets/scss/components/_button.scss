@@ -1,6 +1,11 @@
 // Button Component Styles
 .btn {
   transition: all 0.3s ease !important;
+  border-radius: 50rem !important ;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
 
   &-light {
     background-color: #F3F4F6;
@@ -10,7 +15,6 @@
     &:hover {
       background-color: #e5e7eb;
       border-color: #e5e7eb;
-      transform: translateY(-2px);
     }
   }
 
@@ -21,7 +25,6 @@
     &:hover {
       background-color: #333;
       border-color: #333;
-      transform: translateY(-2px);
     }
   }
 }
