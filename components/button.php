@@ -22,11 +22,13 @@ $target = $link['target'] ?: '_self';
 
 $button_classes = 'btn fw-semibold ';
 
-if ( $variant === 'secondary' ) {
-	$button_classes .= 'btn-light text-dark';
-} else {
-	$button_classes .= 'btn-dark d-inline-flex align-items-center';
-}
+$variants = [
+        'secondary' => 'btn-secondary text-dark',
+        'tertiary'  => 'btn-tertiary d-inline-flex align-items-center',
+        'info'      => 'btn-info d-inline-flex align-items-center text-white',
+];
+
+$button_classes .= $variants[$variant] ?? 'btn-primary d-inline-flex align-items-center text-white';
 
 if ( $class ) {
 	$button_classes .= ' ' . $class;

@@ -3,88 +3,12 @@
     "title": "Blok: Post Type Carousel",
     "fields": [
         {
-            "key": "field_ptc_label",
-            "label": "Label",
-            "name": "label",
+            "key": "field_ptc_tab_content",
+            "label": "Inhoud",
+            "name": "",
             "aria-label": "",
-            "type": "text",
-            "instructions": "Kleine tekst boven de titel (bijv. Agenda)",
-            "required": 0,
-            "conditional_logic": false,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Agenda",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_ptc_title",
-            "label": "Titel",
-            "name": "title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "Hoofdtitel",
-            "required": 0,
-            "conditional_logic": false,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "Aankomende evenementen",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_ptc_text",
-            "label": "Tekst",
-            "name": "text",
-            "aria-label": "",
-            "type": "textarea",
-            "instructions": "Beschrijvende tekst",
-            "required": 0,
-            "conditional_logic": false,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "rows": 3,
-            "new_lines": "br",
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": ""
-        },
-        {
-            "key": "field_ptc_cta_link",
-            "label": "Knop",
-            "name": "cta_link",
-            "aria-label": "",
-            "type": "link",
-            "instructions": "Link voor de knop (bijv. Volledige agenda)",
-            "required": 0,
-            "conditional_logic": false,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array"
-        },
-        {
-            "key": "field_ptc_post_type",
-            "label": "Post Type",
-            "name": "post_type",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "Typ hier de post type om weer te geven",
+            "type": "tab",
+            "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -92,65 +16,246 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "post": "Berichten",
-                "page": "Pagina's",
-                "attachment": "Media",
-                "call-to-actions": "Call to actions",
-                "medewerkers": "Medewerkers"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 1,
-            "ui": 1,
-            "ajax": 1,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
         },
         {
-            "key": "field_ptc_limit",
-            "label": "Aantal",
-            "name": "limit",
+            "key": "field_ptc_group_content",
+            "label": "Inhoud",
+            "name": "content",
             "aria-label": "",
-            "type": "number",
-            "instructions": "Aantal items om weer te geven (Max 10)",
+            "type": "group",
+            "instructions": "",
             "required": 0,
-            "conditional_logic": false,
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "default_value": 6,
-            "min": 1,
-            "max": 10,
-            "step": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_ptc_label",
+                    "label": "Label",
+                    "name": "label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Kleine tekst boven de titel (bijv. Agenda)",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "Agenda",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_ptc_title",
+                    "label": "Titel",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Hoofdtitel",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "Aankomende evenementen",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_ptc_text",
+                    "label": "Tekst",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Beschrijvende tekst",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "rows": 3,
+                    "new_lines": "br",
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_ptc_cta_link",
+                    "label": "Knop",
+                    "name": "cta_link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "Link voor de knop (bijv. Volledige agenda)",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_ptc_post_type",
+                    "label": "Post Type",
+                    "name": "post_type",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "Typ hier de post type om weer te geven",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "post": "Berichten",
+                        "page": "Pagina's",
+                        "attachment": "Media",
+                        "call-to-actions": "Call to actions",
+                        "medewerkers": "Medewerkers"
+                    },
+                    "default_value": false,
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 1,
+                    "ui": 1,
+                    "ajax": 1,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0
+                },
+                {
+                    "key": "field_ptc_limit",
+                    "label": "Aantal",
+                    "name": "limit",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "Aantal items om weer te geven (Max 10)",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 6,
+                    "min": 1,
+                    "max": 10,
+                    "step": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_ptc_date_format",
+                    "label": "Datum opmaak",
+                    "name": "date_format",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "PHP Datum formaat (bijv. d M Y)",
+                    "required": 0,
+                    "conditional_logic": false,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "d M Y",
+                    "placeholder": "d M Y",
+                    "maxlength": "",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
         },
         {
-            "key": "field_ptc_date_format",
-            "label": "Datum opmaak",
-            "name": "date_format",
+            "key": "field_ptc_tab_options",
+            "label": "Opties",
+            "name": "",
             "aria-label": "",
-            "type": "text",
-            "instructions": "PHP Datum formaat (bijv. d M Y)",
+            "type": "tab",
+            "instructions": "",
             "required": 0,
-            "conditional_logic": false,
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "default_value": "d M Y",
-            "placeholder": "d M Y",
-            "maxlength": "",
-            "prepend": "",
-            "append": ""
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_ptc_group_options",
+            "label": "Opties",
+            "name": "options",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_ptc_bg_color",
+                    "label": "Achtergrond kleur",
+                    "name": "achtergrond_kleur",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "bg-primary": "Primair",
+                        "bg-secondary": "Secondair",
+                        "bg-tertiary": "Tertair",
+                        "bg-info": "CTA kleur",
+                        "bg-black": "Zwart",
+                        "bg-white": "Wit"
+                    },
+                    "default_value": "bg-white",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0
+                }
+            ]
         }
     ],
     "location": [
@@ -170,7 +275,7 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 0,
+    "show_in_rest": 1,
     "display_title": "",
-    "modified": 1770134014
+    "modified": 1770219409
 }

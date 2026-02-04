@@ -205,3 +205,9 @@ function pixel_flow_custom_admin_logo() {
 add_action('admin_head', 'pixel_flow_custom_admin_logo');
 add_action('wp_head', 'pixel_flow_custom_admin_logo');
 
+
+add_action('admin_head', 'admin_styles');
+function admin_styles()
+{
+    echo '<style>.block-editor-block-list__block:not(.wp-block-heading):not(.wp-block-buttons):not(.wp-block-button):not(.wp-block-paragraph):not(.wp-block-list)::before{content:attr(data-title);position:relative;display:block;font-size:20px;font-weight:700;max-width:1050px;margin:0 auto 16px;line-height:1;}.block-editor-block-list__block .acf-block-component{max-width:1050px;margin:0 auto;}</style>';
+}

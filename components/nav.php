@@ -47,8 +47,8 @@ $primary_menu = has_nav_menu('navigatie_menu');
                 <?php 
                 get_template_part('components/button', null, [
                     'link' => [
-                        'url' => '/login',
-                        'title' => 'Login',
+                        'url' => '/contact',
+                        'title' => 'Contact',
                         'target' => '_self'
                     ],
                     'variant' => 'primary',

@@ -10,22 +10,40 @@ if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
 
+// ACF Fields
+$content = get_field('content') ?: [];
+$options = get_field('options') ?: [];
+
+$label     = $content['label'] ?: 'Agenda';
+$title     = $content['title'] ?: 'Aankomende evenementen';
+$date_format = $content['date_format'] ?: 'd M Y'; 
+$text      = $content['text'];
+$cta_link  = $content['cta_link'];
+$post_type = $content['post_type'] ?: 'post';
+$limit     = $content['limit'] ?: 6;
+
+// Options
+$bg_color = $options['achtergrond_kleur'] ?: 'bg-black text-white';
+
 // Wrapper classes
-$wrapper_class = 'post-type-carousel-block js-post-type-carousel bg-black text-white py-5';
+// If bg_color is 'bg-white', we likely want dark text. 
+// If it's 'bg-black' or 'bg-primary' etc we usually want white text.
+// Let's rely on utility classes or simple logic. 
+// For now, let's just append the class. 
+// However, the original hardcoded 'bg-black text-white' might conflict if we blindly append.
+// We should remove the hardcoded 'bg-black text-white' from wrapper_class and use the option.
+
+// Text colors based on background
+$text_color = ($bg_color === 'bg-white' || $bg_color === 'bg-light') ? 'text-dark' : 'text-white';
+$text_muted = ($bg_color === 'bg-white' || $bg_color === 'bg-light') ? 'text-muted' : 'text-white-50';
+$nav_color  = ($bg_color === 'bg-white' || $bg_color === 'bg-light') ? 'text-dark border-dark' : 'text-white border-white-50';
+
+$wrapper_class = "post-type-carousel-block js-post-type-carousel {$bg_color} {$text_color} py-5";
 if ( ! empty( $block['className'] ) ) {
 	$wrapper_class .= ' ' . $block['className'];
 }
 
-// ACF Fields
-$label     = get_field( 'label' ) ?: 'Agenda'; // "Agenda"
-$title     = get_field( 'title' ) ?: 'Aankomende evenementen';
-$date_format = get_field('date_format') ?: 'd M Y'; 
-$text      = get_field( 'text' );
-$cta_link  = get_field( 'cta_link' );
-$post_type = get_field( 'post_type' ) ?: 'post';
-$limit     = get_field( 'limit' ) ?: 6;
-
-// Validate limit
+// Ensure limit is safe
 if ( $limit > 10 ) {
 	$limit = 10;
 }
@@ -46,7 +64,7 @@ $query = new WP_Query( $args );
 		<div class="row align-items-end mb-5">
 			<div class="col-lg-8">
 				<?php if ( $label ) : ?>
-					<h6 class="text-uppercase fw-bold mb-3" style="font-size: 0.9rem; letter-spacing: 1px; color: #fff; opacity: 0.8;">
+					<h6 class="text-uppercase fw-bold mb-3" style="font-size: 0.9rem; letter-spacing: 1px; opacity: 0.8;">
 						<?php echo esc_html( $label ); ?>
 					</h6>
 				<?php endif; ?>
@@ -58,7 +76,7 @@ $query = new WP_Query( $args );
 				<?php endif; ?>
 
 				<?php if ( $text ) : ?>
-					<p class="lead mb-0 text-white-50" style="max-width: 600px;">
+					<p class="lead mb-0 <?php echo esc_attr($text_muted); ?>" style="max-width: 600px;">
 						<?php echo html_entity_decode( $text ); ?>
 					</p>
 				<?php endif; ?>
@@ -92,14 +110,14 @@ $query = new WP_Query( $args );
 							$location = get_field('location'); // Example meta
 						?>
 							<div class="swiper-slide h-auto">
-								<div class="card h-100 bg-transparent border-0 text-white">
+								<div class="card h-100 bg-transparent border-0 <?php echo esc_attr($text_color); ?>">
 									<!-- Image Wrapper -->
 									<div class="position-relative rounded-3 overflow-hidden mb-4" style="aspect-ratio: 4/3;">
 										<?php if ( $thumb_url ) : ?>
 											<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php the_title_attribute(); ?>" class="w-100 h-100 object-fit-cover transition-transform duration-500 hover-scale">
 										<?php else : ?>
 											<div class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center">
-												<span class="text-white-50"><i class="fa-solid fa-image fa-2xl"></i></span>
+												<span class="<?php echo esc_attr($text_muted); ?>"><i class="fa-solid fa-image fa-2xl"></i></span>
 											</div>
 										<?php endif; ?>
 									</div>
@@ -113,20 +131,20 @@ $query = new WP_Query( $args );
 										<?php endif; ?>
 
 										<h4 class="card-title fw-bold mb-2">
-											<a href="<?php the_permalink(); ?>" class="text-white text-decoration-none stretched-link">
+											<a href="<?php the_permalink(); ?>" class="<?php echo esc_attr($text_color); ?> text-decoration-none stretched-link">
 												<?php the_title(); ?>
 											</a>
 										</h4>
 										
 										<?php if($location): ?>
-											<div class="text-white-50 mb-3 small"><?php echo esc_html($location); ?></div>
+											<div class="<?php echo esc_attr($text_muted); ?> mb-3 small"><?php echo esc_html($location); ?></div>
 										<?php endif; ?>
 
-										<div class="card-text text-white-50 mb-4 clamp-2">
+										<div class="card-text <?php echo esc_attr($text_muted); ?> mb-4 clamp-2">
 											<?php echo wp_trim_words( get_the_excerpt(), 15 ); ?>
 										</div>
 
-										<div class="d-flex align-items-center text-white fw-bold hover-translate">
+										<div class="d-flex align-items-center <?php echo esc_attr($text_color); ?> fw-bold hover-translate">
 											Bekijk <?= $post_term->labels->singular_name; ?>
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right ms-2" viewBox="0 0 16 16">
 												<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
@@ -142,12 +160,12 @@ $query = new WP_Query( $args );
                 <!-- Navigation Button Wrapper -->
                 <!-- Mobile: Flex container below swiper / in flow. Desktop: Absolute positioned buttons via CSS. -->
                 <div class="swiper-nav-wrapper d-flex justify-content-end gap-3 mt-4 mt-lg-0">
-                     <div class="swiper-button-prev js-swiper-button-prev swiper-button-prev-<?php echo esc_attr( $block['id'] ); ?> text-white"></div>
-                     <div class="swiper-button-next js-swiper-button-next swiper-button-next-<?php echo esc_attr( $block['id'] ); ?> text-white"></div>
+                     <div class="swiper-button-prev js-swiper-button-prev swiper-button-prev-<?php echo esc_attr( $block['id'] ); ?> <?php echo esc_attr($nav_color); ?>"></div>
+                     <div class="swiper-button-next js-swiper-button-next swiper-button-next-<?php echo esc_attr( $block['id'] ); ?> <?php echo esc_attr($nav_color); ?>"></div>
                 </div>
 
 			<?php else : ?>
-				<div class="alert alert-info bg-transparent border-secondary text-white-50">
+				<div class="alert alert-info bg-transparent border-secondary <?php echo esc_attr($text_muted); ?>">
 					Geen records gevonden.
 				</div>
 			<?php endif; ?>
@@ -161,13 +179,13 @@ $query = new WP_Query( $args );
     #<?php echo esc_attr( $block_id ); ?> .swiper-button-next {
         width: 44px;
         height: 44px;
-        border: 1px solid rgba(255,255,255,0.2);
+        
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
-        background-color: rgba(0,0,0,0.5); /* contrast */
+        background-color: transparent; /* Changed from semi-transparent black to utilize border */
         cursor: pointer;
         z-index: 10;
         position: static; /* Default mobile: static in flow */
@@ -179,9 +197,9 @@ $query = new WP_Query( $args );
     }
     #<?php echo esc_attr( $block_id ); ?> .swiper-button-prev:hover,
     #<?php echo esc_attr( $block_id ); ?> .swiper-button-next:hover {
-        background: #fff;
-        color: #000 !important;
-        border-color: #fff;
+        background: currentColor;
+        color: #888 !important; /* Invert needed? Rely on opacity or specific hover styles */
+        opacity: 0.8;
     }
     
     /* Desktop positioning */
