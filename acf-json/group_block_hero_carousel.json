@@ -1,5 +1,5 @@
 {
-    "key": "group_6981cafb77f84",
+    "key": "group_block_hero_carousel",
     "title": "Blok: Hero Carousel",
     "fields": [
         {
@@ -173,9 +173,9 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_6981f8f36df78",
-                    "label": "Overlay kleur",
-                    "name": "overlay_kleur",
+                    "key": "field_698340b1ef1b3",
+                    "label": "Variant",
+                    "name": "variant",
                     "aria-label": "",
                     "type": "select",
                     "instructions": "",
@@ -187,10 +187,88 @@
                         "id": ""
                     },
                     "choices": {
+                        "image": "Losstaande foto",
+                        "bg-image": "Achtergrond foto"
+                    },
+                    "default_value": "image",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0
+                },
+                {
+                    "key": "field_6981f8f36df78",
+                    "label": "Overlay kleur",
+                    "name": "overlay_kleur",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_698340b1ef1b3",
+                                "operator": "==",
+                                "value": "bg-image"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
                         "zwart": "Zwart",
                         "wit": "Wit"
                     },
                     "default_value": "zwart",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0
+                },
+                {
+                    "key": "field_698355c03b57b",
+                    "label": "Achtergrond kleur",
+                    "name": "achtergrond_kleur",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_698340b1ef1b3",
+                                "operator": "==",
+                                "value": "image"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "bg-primary": "Primair",
+                        "bg-secondary": "Secondair",
+                        "bg-tertiary": "Tertair",
+                        "bg-info": "CTA kleur",
+                        "bg-black": "Zwart",
+                        "bg-white": "Wit"
+                    },
+                    "default_value": "bg-white",
                     "return_format": "value",
                     "multiple": 0,
                     "allow_null": 0,
@@ -217,7 +295,8 @@
                     },
                     "choices": {
                         "normaal": "Normaal",
-                        "omgedraaid": "Omgedraaid"
+                        "omgedraaid": "Omgedraaid",
+                        "center": "Gecentreerd"
                     },
                     "default_value": "normaal",
                     "return_format": "value",
@@ -252,5 +331,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770126106
+    "modified": 1770218327
 }
