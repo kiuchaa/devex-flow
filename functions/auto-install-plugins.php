@@ -45,6 +45,11 @@ function pf_register_required_plugins() {
 			'slug'     => 'postmark-approved-wordpress-plugin',
 			'required' => true,
 		),
+        array(
+            'name'     => 'Advanced Custom Fields: Font Awesome Field',
+            'slug'     => 'advanced-custom-fields-font-awesome',
+            'required' => true,
+        ),
 		array(
 			'name'     => 'Better Search Replace',
 			'slug'     => 'better-search-replace',

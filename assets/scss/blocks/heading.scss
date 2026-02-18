@@ -1,0 +1,77 @@
+.heading {
+    position: relative;
+    padding: 4rem 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    // Scoping properly inside the block
+
+    &__content {
+        max-width: 800px;
+        margin: 0 auto; // Keeps it centered in container, but content can be left/right
+        // text-align: center; // REMOVED: Managed by utility class (text-start, text-center, text-end)
+        z-index: 2;
+        position: relative;
+    }
+
+    &__mini-title {
+        display: block;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        // Color handled by utility class (e.g. text-primary)
+    }
+
+    &__title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        // Color inherited
+
+        @media (max-width: 768px) {
+            font-size: 2rem;
+        }
+    }
+
+    &__text {
+        font-size: 1.125rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        // Color inherited
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    // Overlay for readability on images
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+
+        // If inside container with rounded corners, respect that
+        border-radius: inherit;
+    }
+
+    // Container Width Background
+    &--container-bg {
+        .heading__container {
+            position: relative;
+            padding: 4rem;
+            background-size: cover;
+            background-position: center;
+            border-radius: 1rem;
+            overflow: hidden; // For overlay
+        }
+    }
+}

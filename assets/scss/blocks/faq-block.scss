@@ -1,0 +1,139 @@
+.faq-block {
+    padding: 4rem 0;
+
+    // Scoped variables
+    --icon-color: currentColor;
+
+    &__title {
+        font-weight: 700;
+        // margin-bottom: 1rem; // Add margin in template if needed
+    }
+
+    &__text {
+        color: #6c757d; // Muted text similar to bootstrap
+        // margin-bottom: 2rem;
+    }
+
+    // Standard Layout Styles
+    &__list {
+        // border-top: 1px solid rgba(0,0,0,0.1);
+
+        &.border-topp {
+            // legacy support or standard view specific
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    &__item {
+        // border-bottom: 1px solid rgba(0,0,0,0.1);
+
+        &.border-bottomm {
+            // legacy support or standard view specific
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        &.last-border-0:last-child {
+            border-bottom: 0 !important;
+        }
+    }
+
+    &__trigger {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: none;
+        border: none;
+        padding: 1.5rem 0; // Standard padding
+        text-align: left;
+        cursor: pointer;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--bs-primary, #007bff); // Fallback if bootstrap var missing
+        }
+
+        &[aria-expanded="true"] {
+            .faq-block__icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &__question {
+        font-weight: 600;
+        font-size: 1.125rem;
+        padding-right: 1rem;
+    }
+
+    &__icon {
+        color: var(--icon-color); // This might be overridden by text-{color} class
+        transition: transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    &__answer {
+        overflow: hidden;
+        /* Animation logic usually handled by JS toggling height or a class */
+
+        &-inner {
+          padding-bottom: 1.5rem; // Standard padding
+          line-height: 1.6;
+
+          p {
+            margin-bottom: 0 !important;
+          }
+        }
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    // Categorized Layout Navigation
+    &__nav {
+      display: flex;
+      flex-direction: column;
+
+      @media (max-width: 991.98px) {
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.5rem; // Space for scrollbar if visible
+
+        // Hide scrollbar for cleaner look but remain scrollable
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .list-group-item {
+            flex: 0 0 auto; // Prevent shrinking
+            width: auto;
+        }
+      }
+
+      .list-group-item {
+          color: #495057;
+          background-color: transparent;
+          font-weight: 500;
+          transition: all 0.2s ease;
+
+          &:hover {
+              background-color: #f8f9fa;
+              color: #000;
+          }
+
+          &.active {
+              background-color: #f8f9fa; // Light gray as per design (or white if bg is gray)
+              color: #000;
+              font-weight: 700;
+              border-color: transparent; // Remove bootstrap active border
+          }
+      }
+    }
+}

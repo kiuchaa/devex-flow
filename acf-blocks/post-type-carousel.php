@@ -12,7 +12,7 @@ if ( ! empty( $block['anchor'] ) ) {
 
 // ACF Fields
 $content = get_field('content') ?: [];
-$options = get_field('options') ?: [];
+$options = get_field('opties') ?: [];
 
 $label     = $content['label'] ?: 'Agenda';
 $title     = $content['title'] ?: 'Aankomende evenementen';
@@ -23,22 +23,20 @@ $post_type = $content['post_type'] ?: 'post';
 $limit     = $content['limit'] ?: 6;
 
 // Options
-$bg_color = $options['achtergrond_kleur'] ?: 'bg-black text-white';
+// Options
+$bg_color_val = $options['achtergrondkleur'] ?: 'white';
+$icon_color = $options['icoon_kleur'] ?: 'black';
 
-// Wrapper classes
-// If bg_color is 'bg-white', we likely want dark text. 
-// If it's 'bg-black' or 'bg-primary' etc we usually want white text.
-// Let's rely on utility classes or simple logic. 
-// For now, let's just append the class. 
-// However, the original hardcoded 'bg-black text-white' might conflict if we blindly append.
-// We should remove the hardcoded 'bg-black text-white' from wrapper_class and use the option.
+// Contrast Logic
+$text_context_class = 'text-white';
+if (in_array($bg_color_val, ['white', 'info'])) {
+    $text_context_class = 'text-dark';
+}
 
-// Text colors based on background
-$text_color = ($bg_color === 'bg-white' || $bg_color === 'bg-light') ? 'text-dark' : 'text-white';
-$text_muted = ($bg_color === 'bg-white' || $bg_color === 'bg-light') ? 'text-muted' : 'text-white-50';
-$nav_color  = ($bg_color === 'bg-white' || $bg_color === 'bg-light') ? 'text-dark border-dark' : 'text-white border-white-50';
+// Navigation arrows color to match text
+$nav_color = $text_context_class;
 
-$wrapper_class = "post-type-carousel-block js-post-type-carousel {$bg_color} {$text_color} py-5";
+$wrapper_class = "post-type-carousel-block js-post-type-carousel bg-{$bg_color_val} {$text_context_class} py-5";
 if ( ! empty( $block['className'] ) ) {
 	$wrapper_class .= ' ' . $block['className'];
 }
@@ -49,6 +47,8 @@ if ( $limit > 10 ) {
 }
 
 $post_term = get_post_type_object($post_type);
+$singular_label = $post_term->labels->singular_name;
+$plural_label = $post_term->label;
 
 // Query
 $args = [
@@ -64,8 +64,8 @@ $query = new WP_Query( $args );
 		<div class="row align-items-end mb-5">
 			<div class="col-lg-8">
 				<?php if ( $label ) : ?>
-					<h6 class="text-uppercase fw-bold mb-3" style="font-size: 0.9rem; letter-spacing: 1px; opacity: 0.8;">
-						<?php echo esc_html( $label ); ?>
+					<h6 class="text-uppercase fw-bold mb-3" style="font-size: 0.9rem; opacity: 0.8;">
+						<?php echo esc_html( $label ?: $plural_label ); ?>
 					</h6>
 				<?php endif; ?>
 
@@ -76,7 +76,7 @@ $query = new WP_Query( $args );
 				<?php endif; ?>
 
 				<?php if ( $text ) : ?>
-					<p class="lead mb-0 <?php echo esc_attr($text_muted); ?>" style="max-width: 600px;">
+					<p class="mb-0 <?php echo esc_attr($text_muted); ?>" style="max-width: 600px;">
 						<?php echo html_entity_decode( $text ); ?>
 					</p>
 				<?php endif; ?>
@@ -90,7 +90,7 @@ $query = new WP_Query( $args );
                                     'title' => esc_html( $cta_link['title']),
                                     'target' => '_self'
                             ],
-                            'variant' => 'secondary',
+                            'variant' => $icon_color,
                             'class' => 'px-4 py-2 fw-medium'
                     ]);
                 endif; ?>
@@ -110,7 +110,7 @@ $query = new WP_Query( $args );
 							$location = get_field('location'); // Example meta
 						?>
 							<div class="swiper-slide h-auto">
-								<div class="card h-100 bg-transparent border-0 <?php echo esc_attr($text_color); ?>">
+								<div class="card h-100 bg-transparent border-0">
 									<!-- Image Wrapper -->
 									<div class="position-relative rounded-3 overflow-hidden mb-4" style="aspect-ratio: 4/3;">
 										<?php if ( $thumb_url ) : ?>
@@ -131,7 +131,7 @@ $query = new WP_Query( $args );
 										<?php endif; ?>
 
 										<h4 class="card-title fw-bold mb-2">
-											<a href="<?php the_permalink(); ?>" class="<?php echo esc_attr($text_color); ?> text-decoration-none stretched-link">
+											<a href="<?php the_permalink(); ?>" class="text-reset text-decoration-none stretched-link">
 												<?php the_title(); ?>
 											</a>
 										</h4>
@@ -144,8 +144,8 @@ $query = new WP_Query( $args );
 											<?php echo wp_trim_words( get_the_excerpt(), 15 ); ?>
 										</div>
 
-										<div class="d-flex align-items-center <?php echo esc_attr($text_color); ?> fw-bold hover-translate">
-											Bekijk <?= $post_term->labels->singular_name; ?>
+										<div class="d-flex align-items-center fw-bold hover-translate">
+											Bekijk <?= strtolower($post_term->labels->singular_name); ?>
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right ms-2" viewBox="0 0 16 16">
 												<path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
 											</svg>
@@ -189,6 +189,7 @@ $query = new WP_Query( $args );
         cursor: pointer;
         z-index: 10;
         position: static; /* Default mobile: static in flow */
+        color: inherit; /* Inherit color from parent (text-dark/text-white) */
     }
     #<?php echo esc_attr( $block_id ); ?> .swiper-button-prev:after,
     #<?php echo esc_attr( $block_id ); ?> .swiper-button-next:after {

@@ -42,16 +42,17 @@
                     "name": "label",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Kleine tekst boven de titel (bijv. Agenda)",
+                    "instructions": "Kleine tekst boven de titel",
                     "required": 0,
-                    "conditional_logic": false,
+                    "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "Agenda",
+                    "default_value": "",
                     "maxlength": "",
+                    "allow_in_bindings": 1,
                     "placeholder": "",
                     "prepend": "",
                     "append": ""
@@ -207,9 +208,9 @@
             "selected": 0
         },
         {
-            "key": "field_ptc_group_options",
+            "key": "field_block_post_type_carousel_opties",
             "label": "Opties",
-            "name": "options",
+            "name": "opties",
             "aria-label": "",
             "type": "group",
             "instructions": "",
@@ -223,11 +224,11 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_ptc_bg_color",
-                    "label": "Achtergrond kleur",
-                    "name": "achtergrond_kleur",
+                    "key": "field_block_post_type_carousel_bg_color",
+                    "label": "Achtergrondkleur",
+                    "name": "achtergrondkleur",
                     "aria-label": "",
-                    "type": "select",
+                    "type": "radio",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -237,23 +238,50 @@
                         "id": ""
                     },
                     "choices": {
-                        "bg-primary": "Primair",
-                        "bg-secondary": "Secondair",
-                        "bg-tertiary": "Tertair",
-                        "bg-info": "CTA kleur",
-                        "bg-black": "Zwart",
-                        "bg-white": "Wit"
+                        "primary": "Primair",
+                        "secondary": "Secondaire",
+                        "tertiary": "Tertiare",
+                        "info": "Uniek (info)",
+                        "white": "Wit",
+                        "black": "Zwart"
                     },
-                    "default_value": "bg-white",
+                    "default_value": "white",
                     "return_format": "value",
-                    "multiple": 0,
                     "allow_null": 0,
+                    "other_choice": 0,
                     "allow_in_bindings": 0,
-                    "ui": 0,
-                    "ajax": 0,
-                    "placeholder": "",
-                    "create_options": 0,
-                    "save_options": 0
+                    "layout": "vertical",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_block_post_type_carousel_icon_color",
+                    "label": "Icoon kleur",
+                    "name": "icoon_kleur",
+                    "aria-label": "",
+                    "type": "radio",
+                    "instructions": "Kies hier de kleur voor de iconen in elk USP, houd rekening met de achtergrond",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "primary": "Primair",
+                        "secondary": "Secondaire",
+                        "tertiary": "Tertiare",
+                        "info": "Uniek (info)",
+                        "white": "Wit",
+                        "black": "Zwart"
+                    },
+                    "default_value": "primary",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "vertical",
+                    "save_other_choice": 0
                 }
             ]
         }
@@ -277,5 +305,5 @@
     "description": "",
     "show_in_rest": 1,
     "display_title": "",
-    "modified": 1770219409
+    "modified": 1771339538
 }

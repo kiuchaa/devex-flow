@@ -1,5 +1,28 @@
 // Theme level base styles
 body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.site-main {
+  padding-top: 3rem;
+}
+
+.text {
+  &-tertiary {
+    color: $tertiary !important;
+  }
+}
+
+.bg {
+  &-tertiary {
+    background-color: $tertiary !important;
+    color: $white;
+  }
+}
+
+.fill {
+  &-tertiary {
+    color: $tertiary !important;
+  }
 }
