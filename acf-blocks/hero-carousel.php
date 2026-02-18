@@ -14,12 +14,11 @@ $variant  = $options['variant'] ?? 'default';
 $order    = $options['volgorde'] ?? 'default';
 $is_split = ( $variant === 'image' );
 
-// 2. Dynamic ID & Wrapper Classes
 $block_id      = $block['anchor'] ?: 'hero-carousel-' . $block['id'];
 $wrapper_class = 'hero-carousel-block js-hero-carousel b-hero-carousel position-relative overflow-hidden ' . ($block['className'] ?? '');
 
 if ( $is_split ) {
-    $wrapper_class .= " header-hero-component py-5 {$options['achtergrond_kleur']}";
+    $wrapper_class .= " header-hero-component py-2 py-md-5 {$options['achtergrond_kleur']}";
 } else {
     $wrapper_class .= ' split-content' . ($options['overlay_kleur'] === 'wit' ? ' white' : '') . ($order === 'omgedraaid' ? ' reverse' : '');
 }
@@ -56,10 +55,10 @@ $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: ce
 
         <?php if ( $is_split ) : ?>
             <div class="container">
-                <div class="row align-items-center gy-5">
+                <div class="row align-items-center gy-2 gy-md-5">
                     <div class="<?= $conf['col_content']; ?> d-flex flex-column">
-                        <?php if ($title): ?><h1 class="display-3 fw-bolder mb-4 ls-tight" data-aos="fade-up"><?= esc_html($title); ?></h1><?php endif; ?>
-                        <?php if ($text): ?><div class="lead mb-5" style="line-height: 1.6;" data-aos="fade-up" data-aos-delay="250"><?= wp_kses_post($text); ?></div><?php endif; ?>
+                        <?php if ($title): ?><h1 class="display-3 fw-bolder mb-2 mb-md-4 ls-tight" data-aos="fade-up"><?= esc_html($title); ?></h1><?php endif; ?>
+                        <?php if ($text): ?><div class="lead mb-2 mb-md-5" style="line-height: 1.6;" data-aos="fade-up" data-aos-delay="250"><?= wp_kses_post($text); ?></div><?php endif; ?>
 
                         <div class="d-flex flex-wrap gap-3 <?= $conf['justify']; ?>" data-aos="fade-in" data-aos-delay="500">
                             <?php
@@ -76,7 +75,7 @@ $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: ce
                                 <div class="swiper-wrapper">
                                     <?php foreach ($gallery as $image) : ?>
                                         <div class="swiper-slide overflow-hidden">
-                                            <img src="<?= esc_url($image['url']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
+                                            <img src="<?= esc_url($image['sizes']['medium_large']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
@@ -89,13 +88,13 @@ $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: ce
             </div>
 
         <?php else : ?>
-            <?php if ($gallery) : ?>
+            <?php if ($gallery): ?>
                 <div class="swiper js-hero-swiper heroCarouselSwiper-<?= esc_attr($block['id']); ?> position-absolute top-0 start-0 w-100 h-100" style="z-index:1;">
                     <div class="swiper-wrapper">
                         <?php foreach ($gallery as $image) : ?>
                             <div class="swiper-slide overflow-hidden">
                                 <div class="w-100 h-100 bg-dark position-absolute top-0 start-0" style="opacity: 0.5; z-index: 2;"></div>
-                                <img src="<?= esc_url($image['url']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
+                                <img src="<?= esc_url($image['sizes']['medium_large']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -107,10 +106,10 @@ $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: ce
                     <div class="col-lg-8 col-xl-7 <?= ($order === 'omgedraaid' ? 'ms-auto' : ($order === 'center' ? 'mx-auto' : '')); ?>">
                         <div class="hero-content text-white <?= ($conf['col_content']); ?>">
                             <?php if ($title): ?><h1 class="display-2 fw-bolder mb-4" data-aos="fade-up"><?= esc_html($title); ?></h1><?php endif; ?>
-                            <?php if ($text): ?><div class="lead mb-5" style="opacity: 0.9;" data-aos="fade-up" data-aos-delay="250"><?= wp_kses_post($text); ?></div><?php endif; ?>
-                            <div class="d-flex flex-wrap gap-3 <?= $conf['justify']; ?>">
+                            <?php if ($text): ?><div class="lead mb-5" data-aos="fade-up" data-aos-delay="250"><?= wp_kses_post($text); ?></div><?php endif; ?>
+                            <div class="d-flex flex-wrap gap-3 <?= $conf['justify']; ?>" data-aos="fade-in" data-aos-delay="500">
                                 <?php
-                                if ($content['button_1']) get_template_part('components/button', null, ['link' => $content['button_1'], 'variant' => 'info']);
+                                if ($content['button_1']) get_template_part('components/button', null, ['link' => $content['button_1'], 'variant' => 'primary']);
                                 if ($content['button_2']) get_template_part('components/button', null, ['link' => $content['button_2'], 'variant' => 'secondary']);
                                 ?>
                             </div>

@@ -39,30 +39,15 @@ function pixel_flow_allowed_block_types( $allowed_block_types, $editor_context )
 // Register blocks
 function register_pixel_flow_blocks() {
 	if ( function_exists('acf_register_block_type') ) {
-		
-		// Hero Block
-		acf_register_block_type([
-			'name'            => 'hero',
-			'title'           => __( 'Hero', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/hero.php',
-			'category'        => 'custom_blocks',
-			'icon'            => 'align-full-width',
-			'keywords'        => [ 'hero', 'banner' ],
-			'mode'            => 'edit',
-			'supports'        => [
-				'align'  => false,
-				'mode'   => false,
-			]
-		]);
 
 		// Text & Image Block
 		acf_register_block_type([
-			'name'            => 'text-image',
-			'title'           => __( 'Text & Image', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/text-image.php',
+			'name'            => 'text-media',
+			'title'           => __( 'Tekst & Beeld', 'pixel-flow' ),
+			'render_template' => 'acf-blocks/text-media.php',
 			'category'        => 'custom_blocks',
 			'icon'            => 'align-pull-left',
-			'keywords'        => [ 'text', 'image' ],
+			'keywords'        => [ 'text', 'media' ],
 			'mode'            => 'edit',
 			'supports'        => [
 				'align'  => false,
@@ -100,6 +85,70 @@ function register_pixel_flow_blocks() {
 				'anchor' => true,
 			]
 		]);
+		// Unique Selling Points Block
+		acf_register_block_type([
+			'name'            => 'unique-selling-points',
+			'title'           => __( 'Unique Selling Points', 'pixel-flow' ),
+			'render_template' => 'acf-blocks/unique_selling_points.php',
+			'category'        => 'custom_blocks',
+			'icon'            => 'list-view',
+			'keywords'        => [ 'usp', 'features', 'columns' ],
+			'mode'            => 'edit',
+			'supports'        => [
+				'align'  => false,
+				'mode'   => false,
+				'anchor' => true,
+			]
+		]);
+
+		// Video Block
+		acf_register_block_type([
+			'name'            => 'video-block',
+			'title'           => __( 'Video Blok', 'pixel-flow' ),
+			'render_template' => 'acf-blocks/video_block.php',
+			'category'        => 'custom_blocks',
+			'icon'            => 'video-alt3',
+			'keywords'        => [ 'video', 'embed', 'player' ],
+			'mode'            => 'edit',
+			'supports'        => [
+				'align'  => false,
+				'mode'   => false,
+				'anchor' => true,
+			]
+		]);
+
+		// FAQ Block
+		acf_register_block_type([
+			'name'            => 'faq-block',
+			'title'           => __( 'FAQ Blok', 'pixel-flow' ),
+			'render_template' => 'acf-blocks/faq-block.php',
+			'category'        => 'custom_blocks',
+			'icon'            => 'list-view',
+			'keywords'        => [ 'faq', 'accordion', 'questions' ],
+			'mode'            => 'edit',
+			'supports'        => [
+				'align'  => false,
+				'mode'   => false,
+				'anchor' => true,
+			]
+		]);
+
+		// Heading Block
+		acf_register_block_type([
+			'name'            => 'heading',
+			'title'           => __( 'Kop', 'pixel-flow' ),
+			'render_template' => 'acf-blocks/heading.php',
+			'category'        => 'custom_blocks',
+			'icon'            => 'heading',
+			'keywords'        => [ 'heading', 'title', 'header' ],
+			'mode'            => 'edit',
+			'supports'        => [
+				'align'  => false,
+				'mode'   => false,
+				'anchor' => true,
+			]
+		]);
+
 	}
 }
 add_action( 'acf/init', 'register_pixel_flow_blocks' );

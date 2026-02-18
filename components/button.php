@@ -26,6 +26,8 @@ $variants = [
         'secondary' => 'btn-secondary text-dark',
         'tertiary'  => 'btn-tertiary d-inline-flex align-items-center',
         'info'      => 'btn-info d-inline-flex align-items-center text-white',
+        'white'     => 'btn-white d-inline-flex align-items-center text-black',
+        'black'     => 'btn-black d-inline-flex align-items-center text-white',
 ];
 
 $button_classes .= $variants[$variant] ?? 'btn-primary d-inline-flex align-items-center text-white';

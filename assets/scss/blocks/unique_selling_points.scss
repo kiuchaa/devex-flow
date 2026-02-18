@@ -1,0 +1,21 @@
+.unique-selling-points {
+    padding: 3rem 0;
+    .usp-item {
+        .usp-icon {
+            font-size: 2rem;
+
+            i {
+                font-size: 2rem;
+            }
+
+            .svg-icon {
+                max-width: 48px;
+                height: auto;
+                display: inline-block;
+            }
+        }
+        .usp-title {
+            font-weight: 600;
+        }
+    }
+}

@@ -1,0 +1,42 @@
+/* 
+ * Gutenberg Content Alignment 
+ * Forces standard blocks (p, h*, etc.) to align to the container grid 
+ * while allowing ACF blocks to control their own width.
+ */
+
+.site-main> {
+    // Target standard typography elements that are direct children
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ul:not([class]),
+    // Only target standard lists, avoid navigations
+    ol:not([class]),
+    dl,
+    blockquote,
+    pre,
+    table,
+
+    // Target specific Gutenberg blocks wrapper classes
+    .wp-block-image:not(.alignfull):not(.alignwide),
+    .wp-block-quote,
+    .wp-block-code,
+    .wp-block-table,
+    .wp-block-preformatted,
+    .wp-block-verse,
+    .wp-block-group:not(.alignfull):not(.alignwide) {
+        @extend .container;
+        margin-left: auto;
+        margin-right: auto;
+
+        // Ensure images inside responsive standard blocks don't overflow
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}

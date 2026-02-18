@@ -9,9 +9,9 @@ $logo_id = get_field('logo', 'options');
 $primary_menu = has_nav_menu('navigatie_menu');
 ?>
 
-<nav class="navbar navbar-expand-lg sticky-top main-navigation">
+<nav class="navbar navbar-expand-lg fixed-top main-navigation">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="<?php echo esc_url(home_url('/')); ?>">
+        <a class="navbar-brand d-flex align-items-center" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Read more about Seminole tax hike">
             <?php if ($logo_id) : ?>
                 <?php echo wp_get_attachment_image($logo_id, 'medium_large', false, ['class' => 'd-inline-block align-top me-2']); ?>
             <?php else : ?>
@@ -59,3 +59,4 @@ $primary_menu = has_nav_menu('navigatie_menu');
         </div>
     </div>
 </nav>
+<div class="navbar-overlay"></div>

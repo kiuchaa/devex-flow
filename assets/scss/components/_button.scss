@@ -2,29 +2,30 @@
 .btn {
   transition: all 0.3s ease !important;
   border-radius: 50rem !important ;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
 
   &:hover {
     transform: translateY(-2px);
   }
 
-  &-light {
-    background-color: #F3F4F6;
-    border-color: #F3F4F6;
-    color: #1F2937;
+  &-tertiary {
+    background-color: $tertiary !important;
+  }
+
+  &-white {
+    background-color: $white !important;
 
     &:hover {
-      background-color: #e5e7eb;
-      border-color: #e5e7eb;
+      background-color: darken($white, 10%) !important;
     }
   }
 
-  &-dark {
-    background-color: #000;
-    border-color: #000;
+  &-black {
+    background-color: $black !important;
 
     &:hover {
-      background-color: #333;
-      border-color: #333;
+      background-color: lighten($black, 10%) !important;
     }
   }
 }
