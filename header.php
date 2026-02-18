@@ -11,10 +11,5 @@
 <?php
 // Navigation
 get_template_part('components/nav');
-
-// Header Hero (conditional)
-if (!is_front_page() || (is_front_page() && !is_home())) {
-    get_template_part('components/header');
-}
 ?>
     <main id="primary" class="site-main">
