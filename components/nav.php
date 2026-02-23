@@ -43,7 +43,19 @@ $primary_menu = has_nav_menu('navigatie_menu');
             }
             ?>
             
-            <div class="nav-cta d-flex align-items-center mt-3 mt-lg-0">
+            <div class="nav-cta d-flex flex-wrap align-items-center mt-3 mt-lg-0">
+                <?php if (get_option('thema-instellingen_webshop_modus') == 'shop' && class_exists( 'WooCommerce' )) : ?>
+                    <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="nav-icon-link me-3" aria-label="Shop">
+                        <i class="fa-solid fa-shop"></i>
+                    </a>
+                    <a href="<?php echo esc_url(wc_get_page_permalink('cart')); ?>" class="nav-icon-link me-3" aria-label="Cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                    <a href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>" class="nav-icon-link me-3" aria-label="Mijn account">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                <?php endif; ?>
+
                 <?php 
                 get_template_part('components/button', null, [
                     'link' => [

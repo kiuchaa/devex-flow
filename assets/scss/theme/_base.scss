@@ -7,6 +7,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+section,
+.section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+
+  @media (max-width: 991.98px) {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-heading;
 }
@@ -26,15 +37,40 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.bg {
-  &-tertiary {
-    background-color: $tertiary !important;
-    color: $white;
-  }
-}
-
 .fill {
   &-tertiary {
     color: $tertiary !important;
+  }
+}
+
+.bg {
+  &-black {
+    background-color: $black;
+    color: $white;
+  }
+
+  &-white {
+    background-color: $white;
+    color: $black;
+  }
+
+  &-primary {
+    background-color: $primary;
+    color: $white;
+  }
+
+  &-secondary {
+    background-color: $secondary;
+    color: $black;
+  }
+
+  &-tertiary {
+    background-color: $tertiary;
+    color: $white;
+  }
+
+  &-info {
+    background-color: $info;
+    color: $white;
   }
 }

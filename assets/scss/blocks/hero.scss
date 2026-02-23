@@ -1,0 +1,32 @@
+// Hero Header Component Styles
+
+.header-hero-component {
+    background-color: var(--bs-white, #fff);
+
+    h1 {
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+
+        @media (min-width: 992px) {
+            font-size: 3.5rem; // Adjust based on design scale
+        }
+    }
+
+    .lead {
+        color: #6c757d; // Muted text
+    }
+
+
+    // Image Animation
+    .header-hero-image {
+        border-radius: 1rem;
+        width: 100%;
+        max-width: 500px;
+        aspect-ratio: 4/3;
+        transition: transform 0.5s ease;
+
+        &:hover {
+            transform: scale(1.02) rotate(1deg);
+        }
+    }
+}

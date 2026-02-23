@@ -116,6 +116,20 @@
     }
 
     .nav-cta {
+        .nav-icon-link {
+            color: $primary;
+            font-size: 1.25rem;
+            transition: color 0.2s ease, transform 0.2s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                color: $info;
+                transform: scale(1.1);
+            }
+        }
+
         .btn {
             font-size: 1rem;
             transition: transform 0.2s ease, background-color 0.2s ease;
@@ -235,6 +249,11 @@
             width: 100%;
             display: flex;
             justify-content: flex-start !important;
+
+            .nav-icon-link {
+                margin-bottom: 1.5rem;
+                font-size: 1.5rem;
+            }
 
             .btn {
                 width: 100%;
