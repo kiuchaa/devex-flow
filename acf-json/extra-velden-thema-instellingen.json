@@ -16,7 +16,7 @@
                 "class": "",
                 "id": ""
             },
-            "open": 1,
+            "open": 0,
             "multi_expand": 0,
             "endpoint": 0
         },
@@ -559,6 +559,66 @@
                     "ui_off_text": ""
                 }
             ]
+        },
+        {
+            "key": "field_699c4a0fe5dbb",
+            "label": "Danger zone",
+            "name": "",
+            "aria-label": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_699c50086dd2b",
+            "label": "LET OP",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "De onderstaande opties verandert het gedrag van de website op basis van uiterlijk, ACF blokken, plug-ins, en andere instellingen. Het kan er ook voor zorgen dat sommige extra gegevens benodigd zijn.",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_699c4a74e5dbd",
+            "label": "Webshop modus",
+            "name": "webshop_modus",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "Switch de modus van de website, dit heeft effect op de website ACF blokken, plug-ins en mogelijke gegevens die ingevuld moeten worden.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "site": "Nee",
+                "shop": "Ja"
+            },
+            "default_value": "site",
+            "return_format": "value",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal"
         }
     ],
     "location": [
@@ -580,5 +640,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771488058
+    "modified": 1771851879
 }

@@ -1,6 +1,11 @@
 <?php
+/*
+ * Our config file for our theme (like our functions.php)
+ * This is the main configuration file that defines our Pixel Flow theme.
+ */
+
 /**
- * Theme setup
+ * Pre-define menu locations in the theme
  */
 add_action( 'after_setup_theme', 'pixel_flow_setup' );
 function pixel_flow_setup() {
@@ -214,3 +219,18 @@ function admin_styles()
 {
     echo '<style>.block-editor-block-list__block:not(.wp-block-heading):not(.wp-block-buttons):not(.wp-block-button):not(.wp-block-paragraph):not(.wp-block-list)::before{content:attr(data-title);position:relative;display:block;font-size:20px;font-weight:700;max-width:1050px;margin:0 auto 16px;line-height:1;}.block-editor-block-list__block .acf-block-component{max-width:1050px;margin:0 auto;}</style>';
 }
+
+/**
+ * Late-init Theme Support for WooCommerce based on ACF Option
+ */
+add_action( 'after_setup_theme', function() {
+    // Check the 'thema-instellingen' post_id for the webshop_modus button group
+    $webshop_modus = get_option('thema-instellingen_webshop_modus');
+
+    if ( $webshop_modus === 'shop' ) {
+        add_theme_support( 'woocommerce' );
+        add_theme_support( 'wc-product-gallery-zoom' );
+        add_theme_support( 'wc-product-gallery-lightbox' );
+        add_theme_support( 'wc-product-gallery-slider' );
+    }
+}, 20 ); // Priority 20 ensures it runs after most theme setup

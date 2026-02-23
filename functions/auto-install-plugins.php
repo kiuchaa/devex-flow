@@ -57,14 +57,25 @@ function pf_register_required_plugins() {
 		),
 	);
 
-	$config = array(
+    // check if the site is 'webshop' mode, if so make WooCommerce required
+    $webshop_modus = get_option('thema-instellingen_webshop_modus');
+
+    if ( $webshop_modus === 'shop' ) {
+        $plugins[] = [
+            'name'      => 'WooCommerce',
+            'slug'      => 'woocommerce',
+            'required'  => true,
+        ];
+    }
+
+    $config = array(
 		'id'           => 'pf',
 		'default_path' => '',
 		'menu'         => 'tgmpa-install-plugins',
 		'parent_slug'  => 'themes.php',
 		'capability'   => 'edit_theme_options',
 		'has_notices'  => true,
-		'dismissable'  => true,
+		'dismissable'  => false, // Changed to false for testing
 		'dismiss_msg'  => '',
 		'is_automatic' => true,
 		'message'      => '',

@@ -140,6 +140,27 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_68ecafc144065",
+            "label": "Webshop modus",
+            "name": "webshop_modus",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Schakel deze optie in om WooCommerce ondersteuning en webshop functionaliteiten te activeren.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Aan",
+            "ui_off_text": "Uit",
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -161,5 +182,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771323329
+    "modified": 1740316949
 }

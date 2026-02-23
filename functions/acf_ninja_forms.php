@@ -1,13 +1,4 @@
 <?php
-/**
- * Advanced Custom Fields: Ninja Forms Field
- *
- * This source file is subject to the GNU General Public License v3.0
- * that is bundled with this package in the file license.txt.
- * It is also available through the world-wide-web at this URL:
- * http://www.gnu.org/licenses/gpl-3.0.html
- */
-
 class acf_field_ninja_forms extends acf_field {
 
   /*

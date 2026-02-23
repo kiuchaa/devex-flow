@@ -1,8 +1,4 @@
 <?php
-/**
- * ACF Blocks & Options
- */
-
 // Custom block category
 function pixel_flow_block_categories( $categories ) {
 	return array_merge(
@@ -10,7 +6,7 @@ function pixel_flow_block_categories( $categories ) {
 		[
 			[
 				'slug' => 'custom_blocks',
-				'title' => __( 'Custom Blocks', 'pixel-flow' ),
+				'title' => __( 'Website blokken', 'pixel-flow' ),
 			],
 		]
 	);
@@ -152,22 +148,3 @@ function register_pixel_flow_blocks() {
 	}
 }
 add_action( 'acf/init', 'register_pixel_flow_blocks' );
-
-/**
- * Populate an ACF select field with all public post types.
- */
-add_filter('acf/load_field/name=post_type', function($field) {
-    // Clear any manual choices set in the UI
-    $field['choices'] = array();
-
-    // Get all public post types as objects
-    $post_types = get_post_types(array('public' => true), 'objects');
-
-    // Loop through post types and add to choices array
-    // Value = post type slug (e.g., 'page'), Label = post type name (e.g., 'Pages')
-    foreach ($post_types as $post_type) {
-        $field['choices'][$post_type->name] = $post_type->label;
-    }
-
-    return $field;
-});

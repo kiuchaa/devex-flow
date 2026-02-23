@@ -96,13 +96,14 @@ $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: ce
             </div>
 
         <?php else : ?>
+
             <?php if ($gallery): ?>
                 <div class="swiper js-hero-swiper heroCarouselSwiper-<?= esc_attr($block['id']); ?> position-absolute top-0 start-0 w-100 h-100" style="z-index:1;">
                     <div class="swiper-wrapper">
                         <?php foreach ($gallery as $image) : ?>
                             <div class="swiper-slide overflow-hidden">
                                 <div class="w-100 h-100 bg-dark position-absolute top-0 start-0" style="opacity: 0.5; z-index: 2;"></div>
-                                <img src="<?= esc_url($image['sizes']['medium_large']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
+                                <img src="<?= esc_url($image['sizes']['max']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
                             </div>
                         <?php endforeach; ?>
                     </div>

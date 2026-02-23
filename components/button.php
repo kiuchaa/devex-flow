@@ -23,7 +23,7 @@ $target = $link['target'] ?: '_self';
 $button_classes = 'btn fw-semibold ';
 
 $variants = [
-        'secondary' => 'btn-secondary text-dark',
+        'secondary' => 'btn-secondary text-black',
         'tertiary'  => 'btn-tertiary d-inline-flex align-items-center',
         'info'      => 'btn-info d-inline-flex align-items-center text-white',
         'white'     => 'btn-white d-inline-flex align-items-center text-black',
