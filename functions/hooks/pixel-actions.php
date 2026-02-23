@@ -101,6 +101,9 @@ function include_scripts()
  */
 function include_header_styles()
 {
+    // Google Fonts
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap', [], null);
+
     // Enqueue theme assets
     wp_register_style( 'pixel-flow-app', get_template_directory_uri() . '/style.css', array(), filemtime(get_template_directory() . '/style.css') );
     wp_enqueue_style( 'pixel-flow-app' );

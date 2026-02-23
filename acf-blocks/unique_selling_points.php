@@ -22,7 +22,7 @@ if( !empty($block['align']) ) {
 
 $options = get_field('opties');
 $background_color = $options['achtergrondkleur'];
-$icon_color = $options['icoon_kleur'];
+$icon_color = $options['accent_kleur'];
 
 $content = get_field('inhoud');
 $usps = $content['usps'];
@@ -32,9 +32,9 @@ $usps = $content['usps'];
     <div class="container">
         <div class="row justify-content-center">
             <?php if( $usps ): ?>
-                <?php foreach( $usps as $usp ): ?>
+                <?php foreach( $usps as $x => $usp ): ?>
                     <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                        <div class="usp-item text-center p-3 h-100">
+                        <div class="usp-item text-center p-3 h-100" data-aos="fade-right" data-aos-delay="<?= $x * 500 ?>">
                             <div class="usp-icon mb-3 text-<?= $icon_color; ?>">
                                 <?php if( $usp['icon_type'] === 'fontawesome' && !empty($usp['font_awesome_icoon']) ): ?>
                                     <?= $usp['font_awesome_icoon'] ?>

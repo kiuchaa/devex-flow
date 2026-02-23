@@ -150,6 +150,7 @@
 
         h1 {
             text-shadow: none !important; // Force removal
+
             @media (min-width: 992px) {
                 font-size: 3.5rem;
             }
@@ -162,6 +163,21 @@
         .btn {
             text-shadow: none !important;
             box-shadow: none !important; // Remove potential button shadow/overlay
+        }
+    }
+
+    .hero-carousel__pause-toggle {
+        opacity: 0.5;
+        transition: opacity 0.3s ease, transform 0.2s ease;
+        padding: 10px;
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        &.is-paused {
+            opacity: 1;
         }
     }
 }

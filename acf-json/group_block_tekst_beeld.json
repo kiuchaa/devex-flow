@@ -157,11 +157,40 @@
                 },
                 {
                     "key": "field_699321440d244",
-                    "label": "YouTube",
+                    "label": "YouTube URL",
                     "name": "youtube",
                     "aria-label": "",
                     "type": "text",
-                    "instructions": "Voer alleen de 11-tekens code in van de YouTube URL (bijv. dQw4w9WgXcQ) of het gehele URL. De video moet op 'Openbaar' of 'Verborgen' staan; 'Priv\u00e9' werkt niet.",
+                    "instructions": "Voer alleen de 11-tekens code in van de YouTube URL (bijv. dQw4w9WgXcQ) of het gehele URL. De video moet op 'Openbaar' of 'Verborgen' staan; 'Privé' werkt niet.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_699321e570935",
+                                "operator": "==",
+                                "value": "youtube"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_699c2879e7890",
+                    "label": "Vimeo URL",
+                    "name": "vimeo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Voer alleen de 11-tekens code in van de YouTube URL (bijv. dQw4w9WgXcQ) of het gehele URL. De video moet op 'Openbaar' of 'Verborgen' staan; 'Privé' werkt niet.",
                     "required": 0,
                     "conditional_logic": [
                         [
@@ -222,7 +251,7 @@
             "sub_fields": [
                 {
                     "key": "field_text_image_orientation",
-                    "label": "Ori\u00ebntatie",
+                    "label": "Oriëntatie",
                     "name": "orientation",
                     "aria-label": "",
                     "type": "select",
@@ -254,7 +283,7 @@
                     "label": "Beeldmateriaal opties",
                     "name": "beeldmateriaal_opties",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "Er kan hier gekozen worden om een specifieke type beeldmateriaal te tonen naast de tekst.",
                     "required": 0,
                     "conditional_logic": 0,
@@ -266,22 +295,21 @@
                     "choices": {
                         "image": "Afbeelding",
                         "video": "Video",
-                        "youtube": "YouTube video"
+                        "youtube": "YouTube video",
+                        "vimeo": "Vimeo video"
                     },
                     "default_value": "image",
                     "return_format": "value",
                     "allow_null": 0,
-                    "other_choice": 0,
                     "allow_in_bindings": 0,
-                    "layout": "vertical",
-                    "save_other_choice": 0
+                    "layout": "horizontal"
                 },
                 {
                     "key": "field_69932cdfff7f7",
                     "label": "Aspect ratio",
                     "name": "aspect_ratio",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -300,7 +328,7 @@
                     "allow_null": 0,
                     "other_choice": 0,
                     "allow_in_bindings": 0,
-                    "layout": "vertical",
+                    "layout": "horizontal",
                     "save_other_choice": 0
                 },
                 {
@@ -308,7 +336,7 @@
                     "label": "Achtergrondkleur",
                     "name": "achtergrondkleur",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -330,15 +358,15 @@
                     "allow_null": 0,
                     "other_choice": 0,
                     "allow_in_bindings": 0,
-                    "layout": "vertical",
+                    "layout": "horizontal",
                     "save_other_choice": 0
                 },
                 {
                     "key": "field_block_tekst_beeld_icon_color",
-                    "label": "Icoon kleur",
-                    "name": "icoon_kleur",
+                    "label": "Accent kleur",
+                    "name": "accent_kleur",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "Kies hier de kleur voor de iconen in elk USP, houd rekening met de achtergrond",
                     "required": 0,
                     "conditional_logic": 0,
@@ -360,7 +388,7 @@
                     "allow_null": 0,
                     "other_choice": 0,
                     "allow_in_bindings": 0,
-                    "layout": "vertical",
+                    "layout": "horizontal",
                     "save_other_choice": 0
                 }
             ]
@@ -385,5 +413,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771333178
+    "modified": 1771843693
 }

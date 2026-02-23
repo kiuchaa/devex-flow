@@ -14,11 +14,11 @@ $use_categories = get_field('use_categories');
 
 $options = get_field('opties');
 $bg_color = isset($options['achtergrondkleur']) ? $options['achtergrondkleur'] : 'white';
-$icon_color = isset($options['icoon_kleur']) ? $options['icoon_kleur'] : 'primary';
+$icon_color = isset($options['accent_kleur']) ? $options['accent_kleur'] : 'primary';
 
 ?>
 
-<section class="faq-block bg-<?php echo esc_attr($bg_color); ?>">
+<section id="<?php echo esc_attr($block_id); ?>" class="faq-block bg-<?php echo esc_attr($bg_color); ?>" data-pf-block="faq">
     <div class="container">
         
         <?php if ($use_categories): ?>

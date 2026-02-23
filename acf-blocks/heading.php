@@ -25,7 +25,7 @@ $image      = $content_group['background_image'] ?? '';
 // Options sub-fields
 $use_bg_image = $options_group['use_background_image'] ?? false;
 $bg_color     = $options_group['background_color'] ?? 'white';
-$icon_color   = $options_group['icon_color'] ?? 'black';
+$icon_color   = $options_group['accent_kleur'] ?? 'black';
 $width        = $options_group['width'] ?? 'container';
 $text_align   = $options_group['text_alignment'] ?? 'text-center'; // Default center
 

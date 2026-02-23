@@ -27,16 +27,17 @@ $tekst = $inhoud['tekst'] ?? '';
 $knop = $inhoud['knop'] ?? '';
 $video_url = $inhoud['video'] ?? '';
 $youtube = $inhoud['youtube_url'] ?? '';
+$vimeo = $inhoud['vimeo_url'] ?? '';
 
 $type = $opties['beeldformaat'] ?? 'video';
 $bg_color = $opties['achtergrondkleur'] ?? 'white';
-$icon_color = $opties['icoon_kleur'] ?? 'primary';
+$icon_color = $opties['accent_kleur'] ?? 'primary';
 $width = $opties['beeldbreedte'] ?? 'container';
 
 $className .= ' bg-' . $bg_color;
 ?>
 
-<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>">
+<div id="<?php echo esc_attr($id); ?>" class="<?php echo esc_attr($className); ?>" data-pf-block="video-block">
     <div class="container main-content text-center mb-5">
         <?php if($titel): ?>
             <h2 class="block-title mb-3"><?php echo esc_html($titel); ?></h2>
@@ -87,8 +88,12 @@ $className .= ' bg-' . $bg_color;
                 <div class="youtube-wrapper w-100 h-100">
                     <?php echo $youtube; ?>
                 </div>
-            <?php endif; ?>
 
+            <?php elseif($type === 'vimeo' && $vimeo): ?>
+            <div class="youtube-wrapper w-100 h-100">
+                <?php echo $vimeo; ?>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

@@ -1,5 +1,3 @@
-// Text & Image Block Styles
-
 .b-text-image {
     padding: 5rem 0;
 
@@ -30,10 +28,24 @@
     .display-5 {
         font-weight: 700;
         margin-bottom: 1.5rem;
-        color: var(--bs-black);
     }
 
     .lead {
         margin-bottom: 2rem;
+    }
+
+    .media-pause-toggle {
+        opacity: 0.6;
+        transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            background-color: #f8f9fa !important;
+        }
+
+        &.is-paused {
+            opacity: 1;
+        }
     }
 }
