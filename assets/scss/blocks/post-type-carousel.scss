@@ -1,0 +1,70 @@
+.post-type-carousel-block {
+    position: relative;
+
+    .section-label {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        opacity: 0.8;
+    }
+
+    .section-description {
+        max-width: 600px;
+    }
+
+    .card-img-wrapper {
+        aspect-ratio: 4/3;
+    }
+
+    /* Navigation Buttons */
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        background-color: transparent;
+        cursor: pointer;
+        z-index: 10;
+        position: static;
+        /* Default mobile */
+
+        &:after {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        &:hover {
+            background: currentColor;
+            color: #888 !important;
+            opacity: 0.8;
+        }
+    }
+
+    /* Desktop Positioning */
+    @include media-breakpoint-up(lg) {
+        .swiper-nav-wrapper {
+            margin-top: 0 !important;
+            pointer-events: none;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-top: 0;
+            pointer-events: auto;
+        }
+
+        .swiper-button-prev {
+            left: -60px;
+        }
+
+        .swiper-button-next {
+            right: -60px;
+        }
+    }
+}

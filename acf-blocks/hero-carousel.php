@@ -3,14 +3,13 @@
  * Hero Carousel Block Template.
  */
 
-// 1. Data Extraction (using null coalescing for safety)
 $content = get_field('content') ?: [];
-$options = get_field('options') ?: [];
+$options = get_field('opties') ?: [];
 
 $title    = $content['title'] ?? '';
 $text     = $content['text']  ?? '';
 $gallery  = $content['gallery'] ?? [];
-$variant  = $options['variant'] ?? 'default';
+$variant  = $options['variant'] ?? 'bg-image';
 $order    = $options['volgorde'] ?? 'default';
 $is_split = ( $variant === 'image' );
 
@@ -18,7 +17,7 @@ $block_id      = $block['anchor'] ?: 'hero-carousel-' . $block['id'];
 $wrapper_class = 'hero-carousel-block js-hero-carousel b-hero-carousel position-relative overflow-hidden ' . ($block['className'] ?? '');
 
 if ( $is_split ) {
-    $wrapper_class .= " header-hero-component py-2 py-md-5 {$options['achtergrond_kleur']}";
+    $wrapper_class .= " header-hero-component py-2 py-md-5 bg-{$options['achtergrondkleur']}";
 } else {
     $wrapper_class .= ' split-content' . ($options['overlay_kleur'] === 'wit' ? ' white' : '') . ($order === 'omgedraaid' ? ' reverse' : '');
 }
@@ -51,19 +50,19 @@ $conf = $layouts[$order] ?? $layouts['default'];
 $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: center;';
 ?>
 
-    <section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr($wrapper_class); ?>" style="<?= $style_attr; ?>">
+    <section id="<?= esc_attr($block_id); ?>" class="<?= esc_attr($wrapper_class); ?>" style="<?= $style_attr; ?>" data-pf-block="hero-carousel">
 
         <?php if ( $is_split ) : ?>
             <div class="container">
                 <div class="row align-items-center gy-2 gy-md-5">
-                    <div class="<?= $conf['col_content']; ?> d-flex flex-column">
+                    <div class="<?= $conf['col_content']; ?> d-flex flex-column mb-4 mb-lg-0">
                         <?php if ($title): ?><h1 class="display-3 fw-bolder mb-2 mb-md-4 ls-tight" data-aos="fade-up"><?= esc_html($title); ?></h1><?php endif; ?>
                         <?php if ($text): ?><div class="lead mb-2 mb-md-5" style="line-height: 1.6;" data-aos="fade-up" data-aos-delay="250"><?= wp_kses_post($text); ?></div><?php endif; ?>
 
                         <div class="d-flex flex-wrap gap-3 <?= $conf['justify']; ?>" data-aos="fade-in" data-aos-delay="500">
                             <?php
-                            if ($content['button_1']) get_template_part('components/button', null, ['link' => $content['button_1'], 'variant' => 'info', 'class' => 'btn-lg']);
-                            if ($content['button_2']) get_template_part('components/button', null, ['link' => $content['button_2'], 'variant' => 'secondary', 'class' => 'btn-lg']);
+                            if ($content['button_1']) get_template_part('components/button', null, ['link' => $content['button_1'], 'variant' => 'primary']);
+                            if ($content['button_2']) get_template_part('components/button', null, ['link' => $content['button_2'], 'variant' => 'secondary']);
                             ?>
                         </div>
                     </div>
@@ -71,16 +70,25 @@ $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: ce
                     <div class="<?= $conf['col_image']; ?>">
                         <?php if ($gallery) : ?>
                             <div class="position-relative d-inline-block w-100 rounded-3 overflow-hidden shadow-sm" style="<?= $conf['img_style']; ?>" data-aos="fade-in">
-                            <div class="swiper js-hero-swiper heroCarouselSwiper-<?= esc_attr($block['id']); ?> w-100 h-100">
-                                <div class="swiper-wrapper">
-                                    <?php foreach ($gallery as $image) : ?>
-                                        <div class="swiper-slide overflow-hidden">
-                                            <img src="<?= esc_url($image['sizes']['medium_large']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
-                                        </div>
-                                    <?php endforeach; ?>
+                                <div class="swiper js-hero-swiper heroCarouselSwiper-<?= esc_attr($block['id']); ?> w-100 h-100">
+                                    <div class="swiper-wrapper">
+                                        <?php foreach ($gallery as $image) : ?>
+                                            <div class="swiper-slide overflow-hidden">
+                                                <img src="<?= esc_url($image['sizes']['large']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <div class="swiper-pagination swiper-pagination-white position-absolute bottom-0 mb-3" style="z-index: 10;"></div>
                                 </div>
-                                <div class="swiper-pagination swiper-pagination-white position-absolute bottom-0 mb-3" style="z-index: 10;"></div>
-                            </div>
+
+                                <?php if (count($gallery) > 1) : ?>
+                                    <button class="hero-carousel__pause-toggle js-hero-pause-trigger position-absolute bottom-0 end-0 m-4 border-0 bg-transparent text-white"
+                                            style="z-index: 99;"
+                                            aria-label="Pause carousel">
+                                        <i class="fa-solid fa-pause fa-xl"></i>
+                                        <i class="fa-solid fa-play fa-xl d-none"></i>
+                                    </button>
+                                <?php endif; ?>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -118,5 +126,14 @@ $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: ce
                 </div>
             </div>
             <div class="swiper-pagination swiper-pagination-white position-absolute bottom-0 mb-4" style="z-index: 11;"></div>
+            
+            <?php if (count($gallery) > 1) : ?>
+                <button class="hero-carousel__pause-toggle js-hero-pause-trigger position-absolute bottom-0 end-0 m-4 border-0 bg-transparent text-white"
+                        style="z-index: 99;"
+                        aria-label="Pause carousel">
+                    <i class="fa-solid fa-pause fa-xl"></i>
+                    <i class="fa-solid fa-play fa-xl d-none"></i>
+                </button>
+            <?php endif; ?>
         <?php endif; ?>
     </section>

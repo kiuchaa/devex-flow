@@ -263,7 +263,7 @@
                     "label": "Achtergrondkleur",
                     "name": "achtergrondkleur",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -285,15 +285,15 @@
                     "allow_null": 0,
                     "other_choice": 0,
                     "allow_in_bindings": 0,
-                    "layout": "vertical",
+                    "layout": "horizontal",
                     "save_other_choice": 0
                 },
                 {
                     "key": "field_69941d89d1f6a",
-                    "label": "Icoon kleur",
-                    "name": "icoon_kleur",
+                    "label": "Accent kleur",
+                    "name": "accent_kleur",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "Kies hier de kleur voor de iconen in elk USP, houd rekening met de achtergrond",
                     "required": 0,
                     "conditional_logic": 0,
@@ -315,7 +315,7 @@
                     "allow_null": 0,
                     "other_choice": 0,
                     "allow_in_bindings": 0,
-                    "layout": "vertical",
+                    "layout": "horizontal",
                     "save_other_choice": 0
                 }
             ]
@@ -340,5 +340,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771333178
+    "modified": 1771840994
 }

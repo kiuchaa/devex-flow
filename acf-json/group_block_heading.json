@@ -206,7 +206,7 @@
                     "label": "Achtergrondkleur",
                     "name": "background_color",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "",
                     "required": false,
                     "conditional_logic": [
@@ -233,17 +233,17 @@
                     },
                     "default_value": "white",
                     "return_format": "value",
-                    "layout": "vertical",
+                    "layout": "horizontal",
                     "other_choice": 0,
                     "save_other_choice": 0,
                     "allow_null": 0
                 },
                 {
                     "key": "field_block_heading_icon_color",
-                    "label": "Icoon kleur",
-                    "name": "icon_color",
+                    "label": "Accent kleur",
+                    "name": "accent_kleur",
                     "aria-label": "",
-                    "type": "radio",
+                    "type": "button_group",
                     "instructions": "Kleurt hier het mini titel tekstje.",
                     "required": 0,
                     "conditional_logic": 0,
@@ -265,7 +265,7 @@
                     "allow_null": 0,
                     "other_choice": 0,
                     "allow_in_bindings": 1,
-                    "layout": "vertical",
+                    "layout": "horizontal",
                     "save_other_choice": 0
                 },
                 {
@@ -353,5 +353,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771341597
+    "modified": 1771840994
 }

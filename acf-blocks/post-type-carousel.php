@@ -25,7 +25,7 @@ $limit     = $content['limit'] ?: 6;
 // Options
 // Options
 $bg_color_val = $options['achtergrondkleur'] ?: 'white';
-$icon_color = $options['icoon_kleur'] ?: 'black';
+$icon_color = $options['accent_kleur'] ?: 'black';
 
 // Contrast Logic
 $text_context_class = 'text-white';
@@ -59,7 +59,7 @@ $args = [
 $query = new WP_Query( $args );
 ?>
 
-<section id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( $wrapper_class ); ?>">
+<section id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( $wrapper_class ); ?>" data-pf-block="post-type-carousel">
 	<div class="container">
 		<div class="row align-items-end mb-5">
 			<div class="col-lg-8">

@@ -1,13 +1,73 @@
 $(document).ready(function () {
-    AOS.init();
+    AOS.init({
+        offset: -150
+    });
 
-    // Initialize all blocks present on page load
-    document.querySelectorAll('.js-hero-carousel').forEach(initHeroCarousel);
-    document.querySelectorAll('.js-post-type-carousel').forEach(initPostTypeCarousel);
-    initVideoBlock();
-    initFaqBlock();
+    // Boot all blocks based on their ID prefixes
+    initBlocks();
+
+    // Global utilities
     initNavbarOverlay();
+
+    // Refresh AOS when images inside text-image blocks are loaded to ensure correct trigger points
+    document.querySelectorAll('.b-text-image img').forEach(img => {
+        img.addEventListener("load", () => {
+            AOS.refresh();
+        });
+    });
 });
+
+/**
+ * Block Dispatcher: Maps ID prefixes/types to initialization functions
+ */
+const initBlocks = (container = document) => {
+    const blockRegistry = {
+        'hero-carousel': initHeroCarousel,
+        'post-type-carousel': initPostTypeCarousel,
+        'video-block': initVideoBlock,
+        'faq': initFaqBlock,
+        'text-image': (el) => {
+            initVideoBlock(el);
+            initMediaPauseTriggers(el);
+        }
+    };
+
+    // 1. Primary detection: data-pf-block attribute (most reliable)
+    const blocksByAttr = (container === document)
+        ? document.querySelectorAll('[data-pf-block]')
+        : (container.dataset && container.dataset.pfBlock ? [container] : container.querySelectorAll('[data-pf-block]'));
+
+    blocksByAttr.forEach(el => {
+        const type = el.dataset.pfBlock;
+        if (blockRegistry[type] && !el.dataset.pfInitialized) {
+            blockRegistry[type](el);
+            el.dataset.pfInitialized = "true";
+        }
+    });
+
+    // 2. Secondary detection: ID Prefixes (fallback)
+    Object.keys(blockRegistry).forEach(prefix => {
+        const selector = `[id^="${prefix}"]`;
+        let blocksById = [];
+
+        if (container === document) {
+            blocksById = document.querySelectorAll(selector);
+        } else {
+            if (container.id && container.id.startsWith(prefix)) {
+                blocksById = [container];
+            } else {
+                blocksById = container.querySelectorAll(selector);
+            }
+        }
+
+        blocksById.forEach(el => {
+            if (!el.dataset.pfInitialized) {
+                blockRegistry[prefix](el);
+                el.dataset.pfInitialized = "true";
+            }
+        });
+    });
+};
 
 /**
  * Initialize Hero Carousel Block
@@ -23,7 +83,7 @@ const initHeroCarousel = (element) => {
 
     // Only init if swiper container exists and hasn't been initialized yet
     if (swiperContainer && !swiperContainer.swiper) {
-        new Swiper(swiperContainer, {
+        const swiper = new Swiper(swiperContainer, {
             loop: true,
             effect: 'fade',
             fadeEffect: { crossFade: true },
@@ -36,6 +96,27 @@ const initHeroCarousel = (element) => {
                 clickable: true,
             },
         });
+
+        // Pause/Play toggle logic
+        const pauseBtn = element.querySelector('.js-hero-pause-trigger');
+        if (pauseBtn) {
+            pauseBtn.addEventListener('click', function () {
+                const isPaused = pauseBtn.classList.contains('is-paused');
+                if (isPaused) {
+                    swiper.autoplay.start();
+                    pauseBtn.classList.remove('is-paused');
+                    pauseBtn.querySelector('.fa-pause').classList.remove('d-none');
+                    pauseBtn.querySelector('.fa-play').classList.add('d-none');
+                    pauseBtn.setAttribute('aria-label', 'Pause carousel');
+                } else {
+                    swiper.autoplay.stop();
+                    pauseBtn.classList.add('is-paused');
+                    pauseBtn.querySelector('.fa-pause').classList.add('d-none');
+                    pauseBtn.querySelector('.fa-play').classList.remove('d-none');
+                    pauseBtn.setAttribute('aria-label', 'Play carousel');
+                }
+            });
+        }
     }
 };
 
@@ -85,21 +166,16 @@ const initPostTypeCarousel = (element) => {
  * Initialize Video Block
  * @param {HTMLElement} element 
  */
-const initVideoBlock = (element = document) => {
-    // Find wrappers within the element (or if element itself is wrapper)
-    const wrappers = element.querySelectorAll ? element.querySelectorAll('.js-html5-video-wrapper') : [];
+const initVideoBlock = (element) => {
+    // If element is the block itself, use it; otherwise find wrappers inside
+    const wrappers = element.classList.contains('js-html5-video-wrapper') ? [element] : element.querySelectorAll('.js-html5-video-wrapper');
 
     wrappers.forEach(wrapper => {
         const video = wrapper.querySelector('video');
         const playBtn = wrapper.querySelector('.js-play-trigger');
-        const block = wrapper.closest('.video-block');
+        const block = wrapper.closest('.video-block') || wrapper.closest('.b-text-image');
 
         if (!video || !playBtn || !block) return;
-
-        // Remove existing listeners to avoid duplicates in ACF preview re-renders
-        // A simple way is to use a flag or just clone node, but here checking property might be enough
-        if (wrapper.dataset.initialized) return;
-        wrapper.dataset.initialized = "true";
 
         const togglePlay = (e) => {
             e.preventDefault();
@@ -115,9 +191,95 @@ const initVideoBlock = (element = document) => {
         playBtn.addEventListener('click', togglePlay);
         video.addEventListener('click', togglePlay);
 
-        // Ensure state is correct if video ends
         video.addEventListener('ended', () => {
             block.classList.remove('is-playing');
+        });
+    });
+};
+
+/**
+ * Handle Pause/Play for background videos (HTML5, YouTube, Vimeo)
+ * @param {HTMLElement} element 
+ */
+const initMediaPauseTriggers = (element) => {
+    // 1. HTML5 Video
+    element.querySelectorAll('.js-video-pause-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const wrapper = btn.closest('.b-text-image__media-wrapper');
+            const video = wrapper.querySelector('video');
+            if (!video) return;
+
+            if (video.paused) {
+                video.play();
+                btn.classList.remove('is-paused');
+                btn.querySelector('.fa-pause').classList.remove('d-none');
+                btn.querySelector('.fa-play').classList.add('d-none');
+                btn.setAttribute('aria-label', 'Pause video');
+            } else {
+                video.pause();
+                btn.classList.add('is-paused');
+                btn.querySelector('.fa-pause').classList.add('d-none');
+                btn.querySelector('.fa-play').classList.remove('d-none');
+                btn.setAttribute('aria-label', 'Play video');
+            }
+        });
+    });
+
+    // 2. YouTube (via PostMessage API)
+    element.querySelectorAll('.js-youtube-pause-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const wrapper = btn.closest('.b-text-image__media-wrapper');
+            const iframe = wrapper.querySelector('.js-youtube-iframe');
+            if (!iframe) return;
+
+            const isPaused = btn.classList.contains('is-paused');
+            const command = isPaused ? 'playVideo' : 'pauseVideo';
+
+            iframe.contentWindow.postMessage(JSON.stringify({
+                event: 'command',
+                func: command,
+                args: []
+            }), '*');
+
+            if (isPaused) {
+                btn.classList.remove('is-paused');
+                btn.querySelector('.fa-pause').classList.remove('d-none');
+                btn.querySelector('.fa-play').classList.add('d-none');
+                btn.setAttribute('aria-label', 'Pause video');
+            } else {
+                btn.classList.add('is-paused');
+                btn.querySelector('.fa-pause').classList.add('d-none');
+                btn.querySelector('.fa-play').classList.remove('d-none');
+                btn.setAttribute('aria-label', 'Play video');
+            }
+        });
+    });
+
+    // 3. Vimeo (via PostMessage API)
+    element.querySelectorAll('.js-vimeo-pause-trigger').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const wrapper = btn.closest('.b-text-image__media-wrapper');
+            const iframe = wrapper.querySelector('.js-vimeo-iframe');
+            if (!iframe) return;
+
+            const isPaused = btn.classList.contains('is-paused');
+            const command = isPaused ? 'play' : 'pause';
+
+            iframe.contentWindow.postMessage(JSON.stringify({
+                method: command
+            }), '*');
+
+            if (isPaused) {
+                btn.classList.remove('is-paused');
+                btn.querySelector('.fa-pause').classList.remove('d-none');
+                btn.querySelector('.fa-play').classList.add('d-none');
+                btn.setAttribute('aria-label', 'Pause video');
+            } else {
+                btn.classList.add('is-paused');
+                btn.querySelector('.fa-pause').classList.add('d-none');
+                btn.querySelector('.fa-play').classList.remove('d-none');
+                btn.setAttribute('aria-label', 'Play video');
+            }
         });
     });
 };
@@ -160,20 +322,13 @@ const initNavbarOverlay = () => {
  * Initialize Blocks in ACF Admin Preview
  */
 if (window.acf) {
-    window.acf.addAction('render_block_preview/type=hero-carousel', function ($block) {
-        initHeroCarousel($block[0]);
-    });
+    window.acf.addAction('render_block_preview', function ($block) {
+        // Run specific dispatcher for this block
+        initBlocks($block[0]);
 
-    window.acf.addAction('render_block_preview/type=post-type-carousel', function ($block) {
-        initPostTypeCarousel($block[0]);
-    });
-
-    window.acf.addAction('render_block_preview/type=video-block', function ($block) {
-        initVideoBlock($block[0]);
-    });
-
-    window.acf.addAction('render_block_preview/type=faq-block', function ($block) {
-        initFaqBlock($block[0]);
+        // Refresh global utilities
+        AOS.init();
+        AOS.refresh();
     });
 }
 

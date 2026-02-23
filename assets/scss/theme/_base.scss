@@ -1,13 +1,25 @@
-// Theme level base styles
+/*
+ * Place theme-related styling in this file.
+ */
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.site-main {
-  padding-top: 3rem;
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
 }
 
+.site-main {
+  padding-top: 3rem;
+
+  @media (max-width: 767px) {
+    padding-top: 4rem;
+  }
+}
+
+// extra support for tertiary colors
 .text {
   &-tertiary {
     color: $tertiary !important;

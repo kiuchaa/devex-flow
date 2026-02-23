@@ -8,6 +8,7 @@
     --pixel-primary-active: #00432b;
 
     --pixel-accent: #19A463;
+    --pixel-baby: #bbffdb;
 }
 
 /* Links */
@@ -127,33 +128,30 @@ a:focus {
     text-shadow: none;
 }
 
-/* 1. Target the ACF Block container in the editor */
+/*
+ * ACF Block header label in the Gutenberg Editor
+ */
 [data-type^="acf/"] {
     position: relative;
-    margin-top: 40px !important; /* Space for the header */
-    border: 1px solid #2271b1 !important; /* ACF Blue border */
+    margin-top: 40px !important;
+    border: solid 1px var(--pixel-primary);
 }
 
-/* 2. Create the Header Label using the data-type attribute */
 [data-type^="acf/"]::before {
     content: "BLOCK: " attr(data-type); /* Automatically grabs 'acf/block-name' */
     position: absolute;
-    top: -31px;
     left: -1px;
-    background: #2271b1;
-    color: #ffffff;
+    background: var(--pixel-primary) ;
+    color: white;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     font-size: 11px;
     font-weight: bold;
     text-transform: uppercase;
+    font-style: italic;
     padding: 6px 12px;
     border-radius: 2px 2px 0 0;
     z-index: 10;
     letter-spacing: 0.05em;
     pointer-events: none;
-}
-
-/* 3. Optional: Subtle background to distinguish the block area */
-.acf-block-fields {
-    background: #fcfcfc !important;
+    margin: 0 !important;
 }
