@@ -293,7 +293,9 @@
                     "allow_null": 0,
                     "ui": 0,
                     "ajax": 0,
-                    "placeholder": ""
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0
                 },
                 {
                     "key": "field_block_heading_width",
@@ -339,7 +341,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf/heading"
+                "value": "acf\/heading"
             }
         ]
     ],
@@ -353,5 +355,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771840994
+    "modified": 1771854115
 }

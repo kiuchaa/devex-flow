@@ -1,0 +1,417 @@
+{
+    "key": "group_block_tekst_beeld",
+    "title": "Blok: Tekst & Beeld",
+    "fields": [
+        {
+            "key": "field_699312fe1af51",
+            "label": "Inhoud",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_699313071af52",
+            "label": "Inhoud",
+            "name": "inhoud",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_text_image_title",
+                    "label": "Titel",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "De hoofdtitel van het blok.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_text_image_text",
+                    "label": "Tekst",
+                    "name": "text",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "De inhoudelijke tekst.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "tabs": "all",
+                    "toolbar": "basic",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "default_value": ""
+                },
+                {
+                    "key": "field_text_image_button",
+                    "label": "Knop",
+                    "name": "button",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "Optionele knop onder de tekst.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_text_image_image",
+                    "label": "Afbeelding",
+                    "name": "image",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "De afbeelding die naast de tekst wordt getoond.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_699321e570935",
+                                "operator": "==",
+                                "value": "image"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "allow_in_bindings": 1,
+                    "preview_size": "medium"
+                },
+                {
+                    "key": "field_699321340d243",
+                    "label": "Video",
+                    "name": "video",
+                    "aria-label": "",
+                    "type": "file",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_699321e570935",
+                                "operator": "==",
+                                "value": "video"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "library": "all",
+                    "min_size": "",
+                    "max_size": "",
+                    "mime_types": ".mp4, .mov",
+                    "allow_in_bindings": 0
+                },
+                {
+                    "key": "field_699321440d244",
+                    "label": "YouTube URL",
+                    "name": "youtube",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Voer alleen de 11-tekens code in van de YouTube URL (bijv. dQw4w9WgXcQ) of het gehele URL. De video moet op 'Openbaar' of 'Verborgen' staan; 'Privé' werkt niet.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_699321e570935",
+                                "operator": "==",
+                                "value": "youtube"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_699c2879e7890",
+                    "label": "Vimeo URL",
+                    "name": "vimeo",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Dit component ondersteund alleen gehele Vimeo URLs (bijv. dQw4w9WgXcQ). De video moet op 'Openbaar' of 'Verborgen' staan; 'Privé' werkt niet.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_699321e570935",
+                                "operator": "==",
+                                "value": "vimeo"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        },
+        {
+            "key": "field_699313101af53",
+            "label": "Opties",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "selected": 0
+        },
+        {
+            "key": "field_699313181af54",
+            "label": "Opties",
+            "name": "opties",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_text_image_orientation",
+                    "label": "Oriëntatie",
+                    "name": "orientation",
+                    "aria-label": "",
+                    "type": "select",
+                    "instructions": "Aan welke kant moet de afbeelding komen?",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "left": "Beeld links",
+                        "right": "Beeld rechts"
+                    },
+                    "default_value": "left",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_null": 0,
+                    "allow_in_bindings": 1,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0
+                },
+                {
+                    "key": "field_699321e570935",
+                    "label": "Beeldmateriaal opties",
+                    "name": "beeldmateriaal_opties",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "Er kan hier gekozen worden om een specifieke type beeldmateriaal te tonen naast de tekst.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "image": "Afbeelding",
+                        "video": "Video",
+                        "youtube": "YouTube video",
+                        "vimeo": "Vimeo video"
+                    },
+                    "default_value": "image",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal"
+                },
+                {
+                    "key": "field_69932cdfff7f7",
+                    "label": "Aspect ratio",
+                    "name": "aspect_ratio",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "16 bij 9": "16:9 (Breedbeeld)",
+                        "1 bij 1": "1:1 (Vierkant)",
+                        "4 bij 3": "4:3 (Standaard)"
+                    },
+                    "default_value": "16 bij 9",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_block_tekst_beeld_bg_color",
+                    "label": "Achtergrondkleur",
+                    "name": "achtergrondkleur",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "primary": "Primair",
+                        "secondary": "Secondaire",
+                        "tertiary": "Tertiare",
+                        "info": "Uniek (info)",
+                        "white": "Wit",
+                        "black": "Zwart"
+                    },
+                    "default_value": "white",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_block_tekst_beeld_icon_color",
+                    "label": "Accent kleur",
+                    "name": "accent_kleur",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "Kies hier de kleur voor de iconen in elk USP, houd rekening met de achtergrond",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "primary": "Primair",
+                        "secondary": "Secondaire",
+                        "tertiary": "Tertiare",
+                        "info": "Uniek (info)",
+                        "white": "Wit",
+                        "black": "Zwart"
+                    },
+                    "default_value": "primary",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "horizontal",
+                    "save_other_choice": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/text-media"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "modified": 1771854452
+}
