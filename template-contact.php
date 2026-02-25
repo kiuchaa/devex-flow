@@ -4,19 +4,34 @@
 */
 
 get_header();
-?>
 
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-8">
-                <h1 class="mb-4"><?php single_post_title(); ?></h1>
-            </div>
+while ( have_posts() ) :
+    the_post();
 
-            <div class="col-lg-4">
-                <?php get_sidebar(); ?>
-            </div>
+    // Hero section logic
+    $thumbnail_id = get_post_thumbnail_id();
+    $image_url    = $thumbnail_id ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : '';
+    ?>
+
+    <header class="contact-header">
+        <?php if ( $image_url ) : ?>
+            <img src="<?php echo esc_url( $image_url ); ?>" class="contact-header-image" alt="<?php the_title_attribute(); ?>">
+            <div class="contact-header-overlay"></div>
+        <?php endif; ?>
+        
+        <div class="container text-center">
+            <h1 class="display-1 fw-bold text-white mb-0" data-aos="fade-up" data-aos-duration="1000">
+                <?php the_title(); ?>
+            </h1>
         </div>
+    </header>
+
+    <div class="contact-blocks">
+        <?php the_content(); ?>
     </div>
 
-<?php
+    <?php
+endwhile;
+
 get_footer();
+

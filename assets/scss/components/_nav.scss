@@ -1,6 +1,5 @@
 // Navigation Styles
 .main-navigation {
-    background-color: #ffffff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
@@ -51,17 +50,17 @@
             a,
             .nav-link {
                 font-weight: 500;
-                font-size: 1rem; // Increased
-                color: #6B7280; // Gray-500 equivalent
+                font-size: 1rem;
                 padding: 0.5rem 1.25rem;
                 transition: color 0.2s ease;
                 text-decoration: none;
+                color: inherit;
 
                 &:hover,
                 &.active,
                 &.current-menu-item,
                 &.show {
-                    color: #111827; // Gray-900 equivalent
+                    color: $primary !important;
                 }
             }
         }
@@ -91,7 +90,7 @@
                 transition: all 0.2s ease;
 
                 &:hover {
-                    color: var(--bs-primary);
+                    color: $primary;
                     text-decoration: none;
                     transform: translateX(4px);
                 }
@@ -125,7 +124,7 @@
             align-items: center;
 
             &:hover {
-                color: $info;
+                color: $primary;
                 transform: scale(1.1);
             }
         }
@@ -194,6 +193,12 @@
                     color: #111827;
                     width: 100%;
                     text-align: left;
+                    transition: color 0.2s ease;
+
+                    &:hover,
+                    &.active {
+                        color: $primary;
+                    }
                 }
             }
         }

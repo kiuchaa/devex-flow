@@ -1,7 +1,7 @@
 // Button Component Styles
 .btn {
-  transition: all 0.3s ease !important;
-  border-radius: 50rem !important ;
+  transition: all 0.3s ease;
+  border-radius: 50rem;
   padding: 0.5rem 1.5rem;
   font-weight: 500;
 
@@ -10,22 +10,23 @@
   }
 
   &-tertiary {
-    background-color: $tertiary !important;
+    background-color: $tertiary;
   }
 
   &-white {
-    background-color: $white !important;
+    background-color: $white;
 
     &:hover {
-      background-color: darken($white, 10%) !important;
+      background-color: darken($white, 10%);
     }
   }
 
   &-black {
-    background-color: $black !important;
+    background-color: $black;
+    color: $white;
 
     &:hover {
-      background-color: lighten($black, 10%) !important;
+      background-color: lighten($black, 10%);
     }
   }
 }

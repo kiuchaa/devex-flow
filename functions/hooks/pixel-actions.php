@@ -65,6 +65,9 @@ function ninjaforms_deregister_styles()
 /**
  * Registering our scripts
  */
+/**
+ * Registering our scripts
+ */
 function include_scripts()
 {
     wp_deregister_script('jquery');
@@ -77,10 +80,6 @@ function include_scripts()
 
     /**
      * Register jquery using jquery-core as a dependency, so other scripts could use the jquery handle
-     * see https://wordpress.stackexchange.com/questions/283828/wp-register-script-multiple-identifiers
-     * We first register the script and afther that we enqueue it, see why:
-     * https://wordpress.stackexchange.com/questions/82490/when-should-i-use-wp-register-script-with-wp-enqueue-script-vs-just-wp-enque
-     * https://stackoverflow.com/questions/39653993/what-is-diffrence-between-wp-enqueue-script-and-wp-register-script
      */
     wp_register_script('jquery', false, ['jquery-core', 'jquery-migrate'], null, false);
     wp_enqueue_script('jquery');
@@ -96,33 +95,43 @@ function include_scripts()
     wp_register_script('aos', 'https://unpkg.com/aos@2.3.1/dist/aos.js', ['jquery'], null, true);
     wp_enqueue_script('aos');
 
-    wp_register_script('pixel-flow-app', get_template_directory_uri() . '/assets/js/app.js', array(), null );
+    // Theme JS with versioning
+    $js_path = '/assets/js/app.js';
+    $js_full_path = get_stylesheet_directory() . $js_path;
+    $js_ver = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? time() : (file_exists($js_full_path) ? filemtime($js_full_path) : '1.0.0');
+    
+    wp_register_script('pixel-flow-app', get_stylesheet_directory_uri() . $js_path, array('jquery'), $js_ver, true);
     wp_enqueue_script('pixel-flow-app');
 }
 
 /**
  * Registering our stylesheets
- * TODO: Keep in mind that our style.css uses versioning, change ilemtime to null to prevent this cache busting
  */
 function include_header_styles()
 {
     // Google Fonts
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap', [], null);
 
-    // Enqueue theme assets
-    wp_register_style( 'pixel-flow-app', get_template_directory_uri() . '/style.css', array(), filemtime(get_template_directory() . '/style.css') );
+    // Main Theme Stylesheet with versioning
+    $css_path = '/style.css';
+    $css_full_path = get_stylesheet_directory() . $css_path;
+    $css_ver = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? time() : (file_exists($css_full_path) ? filemtime($css_full_path) : '1.0.0');
+    
+    wp_register_style( 'pixel-flow-app', get_stylesheet_directory_uri() . $css_path, array(), $css_ver );
     wp_enqueue_style( 'pixel-flow-app' );
 
-    // wp_register_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', [], null);
-    // wp_enqueue_style('bootstrap');
-
+    // External Libraries
     wp_register_style('swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', [], null);
     wp_enqueue_style('swiper');
 
     wp_register_style('aos', 'https://unpkg.com/aos@2.3.1/dist/aos.css', [], null);
     wp_enqueue_style('aos');
 
-    wp_register_style('fontawesome', get_template_directory_uri() . '/assets/font-awesome/css/all.min.css');
+    // FontAwesome with versioning
+    $fa_path = '/assets/font-awesome/css/all.min.css';
+    $fa_full_path = get_stylesheet_directory() . $fa_path;
+    $fa_ver = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? time() : (file_exists($fa_full_path) ? filemtime($fa_full_path) : '6.0.0');
+    wp_register_style('fontawesome', get_stylesheet_directory_uri() . $fa_path, [], $fa_ver);
     wp_enqueue_style('fontawesome');
 }
 
@@ -130,7 +139,6 @@ function include_header_styles()
  * Only enqueue our scripts and stylesheet on the front-end, leaving the CMS as it is.
  */
 if (!is_admin()) {
-    // Counter intuitively, enqueue scripts is also the right hook to enqueue styles
     add_action('wp_enqueue_scripts', 'include_scripts');
     add_action('wp_enqueue_scripts', 'include_header_styles');
 }

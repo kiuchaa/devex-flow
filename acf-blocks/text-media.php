@@ -57,8 +57,7 @@ $image_order   = ( $orientation === 'right' ) ? 'order-1 order-lg-2' : 'order-1 
 						<h2 class="display-5 fw-bolder mb-4 ls-tight" 
                             data-aos="fade-up" 
                             data-aos-duration="600"
-                            data-aos-once="true"
-                            data-aos-anchor="#<?php echo esc_attr( $block_id ); ?>">
+                            data-aos-once="true">
 							<?php echo esc_html( $title ); ?>
 						</h2>
 					<?php endif; ?>
@@ -68,8 +67,7 @@ $image_order   = ( $orientation === 'right' ) ? 'order-1 order-lg-2' : 'order-1 
                             data-aos="fade-up" 
                             data-aos-delay="150" 
                             data-aos-duration="600"
-                            data-aos-once="true"
-                            data-aos-anchor="#<?php echo esc_attr( $block_id ); ?>">
+                            data-aos-once="true">
 							<?php echo wp_kses_post( $text ); ?>
 						</div>
 					<?php endif; ?>
@@ -78,8 +76,7 @@ $image_order   = ( $orientation === 'right' ) ? 'order-1 order-lg-2' : 'order-1 
 						<div class="b-text-image__button" 
                             data-aos="fade-up" 
                             data-aos-delay="300" 
-                            data-aos-once="true"
-                            data-aos-anchor="#<?php echo esc_attr( $block_id ); ?>">
+                            data-aos-once="true">
 							<?php
 							get_template_part( 'components/button', null, [
 								'link'    => $button,

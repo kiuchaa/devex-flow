@@ -19,8 +19,8 @@ remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wra
  * Add custom Bootstrap wrappers globally
  */
 add_action( 'woocommerce_before_main_content', function() {
-    $container_class = ( is_shop() || is_product_category() || is_product_taxonomy() ) ? 'w-100 px-3 px-lg-5' : 'container';
-    echo '<section class="woocommerce-page-wrapper py-5 px-5"><div class="' . esc_attr( $container_class ) . '">';
+    $container_class = ( is_shop() || is_product_category() || is_product_taxonomy() || is_product() ) ? 'container-fluid px-lg-5' : 'container';
+    echo '<section class="woocommerce-page-wrapper py-5"><div class="' . esc_attr( $container_class ) . '">';
 }, 5 );
 
 /**

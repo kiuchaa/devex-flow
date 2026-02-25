@@ -145,6 +145,22 @@ function register_pixel_flow_blocks() {
 			]
 		]);
 
+		// Formulier Block
+		acf_register_block_type([
+			'name'            => 'formulier',
+			'title'           => __( 'Formulier', 'pixel-flow' ),
+			'render_template' => 'acf-blocks/formulier.php',
+			'category'        => 'custom_blocks',
+			'icon'            => 'email-alt',
+			'keywords'        => [ 'formulier', 'contact', 'ninja forms', 'form' ],
+			'mode'            => 'edit',
+			'supports'        => [
+				'align'  => false,
+				'mode'   => false,
+				'anchor' => true,
+			]
+		]);
+
 	}
 }
 add_action( 'acf/init', 'register_pixel_flow_blocks' );

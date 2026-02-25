@@ -21,3 +21,7 @@ function include_field_types_ninja_forms() {
     include_once('acf_ninja_forms.php');
 }
 add_action('acf/include_field_types', 'include_field_types_ninja_forms');
+
+// Disable Ninja Forms default styling to use theme styles only
+add_filter( 'ninja_forms_render_default_css', '__return_false' );
+add_filter( 'ninja_forms_display_css', '__return_false' );

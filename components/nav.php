@@ -9,7 +9,13 @@ $logo_id = get_field('logo', 'options');
 $primary_menu = has_nav_menu('navigatie_menu');
 ?>
 
-<nav class="navbar navbar-expand-lg fixed-top main-navigation">
+<?php
+$nav_style = get_field('navigatiebalk_uiterlijk', 'thema-instellingen');
+
+$nav_color = $nav_style['achtergrondkleur'];
+$nav_accent = $nav_style['accent_kleur'];
+?>
+<nav class="navbar navbar-expand-lg fixed-top main-navigation bg-<?= $nav_color ?>">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="<?php echo esc_url(home_url('/')); ?>" aria-label="Read more about Seminole tax hike">
             <?php if ($logo_id) : ?>
@@ -42,30 +48,44 @@ $primary_menu = has_nav_menu('navigatie_menu');
                 ]);
             }
             ?>
-            
-            <div class="nav-cta d-flex flex-wrap align-items-center mt-3 mt-lg-0">
+
+            <?php
+            $nav_right = get_field('navigatiebalk_rechts', 'thema-instellingen');
+            ?>
+            <div class="nav-cta d-flex flex-wrap align-items-center mt-3 mt-lg-0 text-<?= $nav_accent ?>">
                 <?php if (get_option('thema-instellingen_webshop_modus') == 'shop' && class_exists( 'WooCommerce' )) : ?>
-                    <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="nav-icon-link me-3" aria-label="Shop">
-                        <i class="fa-solid fa-shop"></i>
-                    </a>
-                    <a href="<?php echo esc_url(wc_get_page_permalink('cart')); ?>" class="nav-icon-link me-3" aria-label="Cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
-                    <a href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>" class="nav-icon-link me-3" aria-label="Mijn account">
-                        <i class="fa-solid fa-user"></i>
-                    </a>
+
+                    <?php if($nav_right['shop_icoon_tonen'] && $nav_right['shop_icoon']): ?>
+                        <a href="<?php echo esc_url(wc_get_page_permalink('shop')); ?>" class="nav-icon-link me-3" aria-label="Shop">
+                            <?= $nav_right['shop_icoon'] ?>
+                        </a>
+                    <?php endif; ?>
+
+                    <?php if($nav_right['winkelwagen_icoon_tonen'] && $nav_right['winkelwagen_icoon']): ?>
+                        <a href="<?php echo esc_url(wc_get_page_permalink('cart')); ?>" class="nav-icon-link me-3" aria-label="Cart">
+                            <?= $nav_right['winkelwagen_icoon'] ?>
+                        </a>
+                    <?php endif; ?>
+
+                    <?php if($nav_right['account_icoon_tonen'] && $nav_right['account_icoon']): ?>
+                        <a href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>" class="nav-icon-link me-3" aria-label="Mijn account">
+                            <?= $nav_right['account_icoon'] ?>
+                        </a>
+                    <?php endif; ?>
                 <?php endif; ?>
 
-                <?php 
-                get_template_part('components/button', null, [
-                    'link' => [
-                        'url' => '/contact',
-                        'title' => 'Contact',
-                        'target' => '_self'
-                    ],
-                    'variant' => 'primary',
-                    'class' => 'px-4 py-2 fw-medium'
-                ]);
+                <?php
+                if($nav_right['knop']) {
+                    get_template_part('components/button', null, [
+                            'link' => [
+                                    'url' => $nav_right['knop']['url'],
+                                    'title' => $nav_right['knop']['title'],
+                                    'target' => $nav_right['knop']['target'],
+                            ],
+                            'variant' => 'primary',
+                            'class' => 'px-4 py-2 fw-medium'
+                    ]);
+                }
                 ?>
             </div>
         </div>

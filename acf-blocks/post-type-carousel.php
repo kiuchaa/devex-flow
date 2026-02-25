@@ -29,8 +29,10 @@ $icon_color = $options['accent_kleur'] ?: 'black';
 
 // Contrast Logic
 $text_context_class = 'text-white';
+$text_muted = 'text-white-50';
 if (in_array($bg_color_val, ['white', 'info'])) {
     $text_context_class = 'text-dark';
+    $text_muted = 'text-muted';
 }
 
 // Navigation arrows color to match text

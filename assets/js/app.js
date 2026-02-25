@@ -1,20 +1,37 @@
 $(document).ready(function () {
-    AOS.init({
-        offset: -150
-    });
-
-    // Boot all blocks based on their ID prefixes
+    // Boot all blocks based on their ID prefixes first
     initBlocks();
+
+    // Initialize AOS after blocks are in place
+    AOS.init({
+        offset: 0, // Changed from -150 to 0 for more predictable triggering
+        duration: 800,
+        once: true
+    });
 
     // Global utilities
     initNavbarOverlay();
 
-    // Refresh AOS when images inside text-image blocks are loaded to ensure correct trigger points
-    document.querySelectorAll('.b-text-image img').forEach(img => {
-        img.addEventListener("load", () => {
-            AOS.refresh();
-        });
+    // Refresh AOS when ANY images are loaded to ensure correct trigger points
+    // Using a more robust approach with event delegation or waiting for all images
+    window.addEventListener('load', () => {
+        AOS.refresh();
     });
+
+    document.querySelectorAll('img').forEach(img => {
+        if (img.complete) {
+            AOS.refresh();
+        } else {
+            img.addEventListener("load", () => {
+                AOS.refresh();
+            });
+        }
+    });
+
+    // Also refresh after a small delay to catch any late layout shifts from carousels
+    setTimeout(() => {
+        AOS.refresh();
+    }, 500);
 });
 
 /**
@@ -97,6 +114,9 @@ const initHeroCarousel = (element) => {
             },
         });
 
+        // Refresh AOS after swiper init to account for height changes
+        if (window.AOS) AOS.refresh();
+
         // Pause/Play toggle logic
         const pauseBtn = element.querySelector('.js-hero-pause-trigger');
         if (pauseBtn) {
@@ -159,6 +179,9 @@ const initPostTypeCarousel = (element) => {
                 }
             }
         });
+
+        // Refresh AOS after swiper init
+        if (window.AOS) AOS.refresh();
     }
 };
 

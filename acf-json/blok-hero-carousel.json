@@ -335,34 +335,6 @@
                     "allow_in_bindings": 0,
                     "layout": "horizontal",
                     "save_other_choice": 0
-                },
-                {
-                    "key": "field_699c22fb92a37",
-                    "label": "Accent kleur test",
-                    "name": "accent_kleur_test",
-                    "aria-label": "",
-                    "type": "button_group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "choices": {
-                        "primary": "Primair",
-                        "secondary": "Secondaire",
-                        "tertiary": "Tertiare",
-                        "info": "Uniek (info)",
-                        "white": "Wit",
-                        "black": "Zwart"
-                    },
-                    "default_value": "primary",
-                    "return_format": "value",
-                    "allow_null": 0,
-                    "allow_in_bindings": 0,
-                    "layout": "horizontal"
                 }
             ]
         }
@@ -386,5 +358,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771854377
+    "modified": 1771859532
 }
