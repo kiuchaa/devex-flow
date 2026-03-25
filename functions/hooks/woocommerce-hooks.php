@@ -19,7 +19,7 @@ remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wra
  * Add custom Bootstrap wrappers globally
  */
 add_action( 'woocommerce_before_main_content', function() {
-    $container_class = ( is_shop() || is_product_category() || is_product_taxonomy() || is_product() ) ? 'container-fluid px-lg-5' : 'container';
+    $container_class = 'container-xl';
     echo '<section class="woocommerce-page-wrapper py-5"><div class="' . esc_attr( $container_class ) . '">';
 }, 5 );
 
@@ -27,8 +27,8 @@ add_action( 'woocommerce_before_main_content', function() {
  * Step 1: Open the Row and Sidebar
  * Runs AFTER notices (10), result count (20), and ordering (30) to keep them full-width
  */
-add_action( 'woocommerce_before_shop_loop', function() {
-    if ( is_shop() || is_product_category() || is_product_taxonomy() ) {
+add_action( 'woocommerce_before_main_content', function() {
+    if ( is_shop() || is_product_category() || is_product_taxonomy() || is_search() ) {
         echo '<div class="row shop-main-row mt-4 w-100">';
         echo '<aside class="col-lg-3 shop-sidebar mb-4 mb-lg-0">';
 
@@ -97,8 +97,8 @@ add_action( 'woocommerce_before_shop_loop', function() {
 /**
  * Step 2: Open the Product Column
  */
-add_action( 'woocommerce_before_shop_loop', function() {
-    if ( is_shop() || is_product_category() || is_product_taxonomy() ) {
+add_action( 'woocommerce_before_main_content', function() {
+    if ( is_shop() || is_product_category() || is_product_taxonomy() || is_search() ) {
         echo '<main class="col-lg-9 shop-products-column">';
     }
 }, 42 );
@@ -106,12 +106,12 @@ add_action( 'woocommerce_before_shop_loop', function() {
 /**
  * Step 3: Close the Split
  */
-add_action( 'woocommerce_after_shop_loop', function() {
-    if ( is_shop() || is_product_category() || is_product_taxonomy() ) {
+add_action( 'woocommerce_after_main_content', function() {
+    if ( is_shop() || is_product_category() || is_product_taxonomy() || is_search() ) {
         echo '</main>'; // col-lg-9
         echo '</div>';   // row
     }
-}, 20 );
+}, 10 );
 
 add_action( 'woocommerce_after_main_content', function() {
     echo '</div></section>';

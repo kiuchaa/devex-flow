@@ -1,6 +1,17 @@
 $(document).ready(function () {
+    // 1. Debounced AAS Refresh to prevent forced reflows
+    let aosTimeout;
+    const refreshAOS = () => {
+        clearTimeout(aosTimeout);
+        aosTimeout = setTimeout(() => {
+            if (window.AOS) {
+                AOS.refresh();
+            }
+        }, 150);
+    };
+
     // Boot all blocks based on their ID prefixes first
-    initBlocks();
+    initBlocks(document, refreshAOS);
 
     // Initialize AOS after blocks are in place
     AOS.init({
@@ -11,39 +22,33 @@ $(document).ready(function () {
 
     // Global utilities
     initNavbarOverlay();
+    initNavbarSearch();
 
     // Refresh AOS when ANY images are loaded to ensure correct trigger points
-    // Using a more robust approach with event delegation or waiting for all images
-    window.addEventListener('load', () => {
-        AOS.refresh();
-    });
+    window.addEventListener('load', refreshAOS);
 
     document.querySelectorAll('img').forEach(img => {
         if (img.complete) {
-            AOS.refresh();
+            refreshAOS();
         } else {
-            img.addEventListener("load", () => {
-                AOS.refresh();
-            });
+            img.addEventListener("load", refreshAOS);
         }
     });
 
     // Also refresh after a small delay to catch any late layout shifts from carousels
-    setTimeout(() => {
-        AOS.refresh();
-    }, 500);
+    setTimeout(refreshAOS, 500);
 });
 
 /**
  * Block Dispatcher: Maps ID prefixes/types to initialization functions
  */
-const initBlocks = (container = document) => {
+const initBlocks = (container = document, refreshFn = null) => {
     const blockRegistry = {
-        'hero-carousel': initHeroCarousel,
-        'post-type-carousel': initPostTypeCarousel,
+        'hero-carousel': (el) => initHeroCarousel(el, refreshFn),
+        'post-type-carousel': (el) => initPostTypeCarousel(el, refreshFn),
         'video-block': initVideoBlock,
         'faq': initFaqBlock,
-        'text-image': (el) => {
+        'text-media': (el) => {
             initVideoBlock(el);
             initMediaPauseTriggers(el);
         }
@@ -90,7 +95,7 @@ const initBlocks = (container = document) => {
  * Initialize Hero Carousel Block
  * @param {HTMLElement} element 
  */
-const initHeroCarousel = (element) => {
+const initHeroCarousel = (element, refreshFn = null) => {
     if (typeof Swiper === 'undefined') {
         console.error('Swiper library not loaded for Hero Carousel block.');
         return;
@@ -115,7 +120,8 @@ const initHeroCarousel = (element) => {
         });
 
         // Refresh AOS after swiper init to account for height changes
-        if (window.AOS) AOS.refresh();
+        if (refreshFn) refreshFn();
+        else if (window.AOS) AOS.refresh();
 
         // Pause/Play toggle logic
         const pauseBtn = element.querySelector('.js-hero-pause-trigger');
@@ -144,7 +150,7 @@ const initHeroCarousel = (element) => {
  * Initialize Post Type Carousel Block
  * @param {HTMLElement} element 
  */
-const initPostTypeCarousel = (element) => {
+const initPostTypeCarousel = (element, refreshFn = null) => {
     if (typeof Swiper === 'undefined') {
         console.error('Swiper library not loaded for Post Type Carousel block.');
         return;
@@ -181,7 +187,8 @@ const initPostTypeCarousel = (element) => {
         });
 
         // Refresh AOS after swiper init
-        if (window.AOS) AOS.refresh();
+        if (refreshFn) refreshFn();
+        else if (window.AOS) AOS.refresh();
     }
 };
 
@@ -314,30 +321,40 @@ const initNavbarOverlay = () => {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
+    const body = document.body;
+    let overlay = document.querySelector('.navbar-overlay');
+
     // Create the overlay element if it doesn't exist
-    if (!document.querySelector('.navbar-overlay')) {
-        const overlay = document.createElement('div');
+    if (!overlay) {
+        overlay = document.createElement('div');
         overlay.classList.add('navbar-overlay');
         document.body.appendChild(overlay);
     }
 
-    const body = document.body;
-
-    // Use event delegation on the navbar container
-    // Events fire on the .dropdown parent element and bubble up
-    navbar.addEventListener('show.bs.dropdown', function () {
-        body.classList.add('has-navbar-overlay');
-    });
-
-    navbar.addEventListener('hide.bs.dropdown', function () {
-        // Checking for other open dropdowns after a tiny delay to allow class toggle
+    // Toggle overlay for Bootstrap Dropdowns (Desktop & Mobile)
+    navbar.addEventListener('show.bs.dropdown', () => body.classList.add('has-navbar-overlay'));
+    navbar.addEventListener('hide.bs.dropdown', () => {
         setTimeout(() => {
-            // Check if any dropdown menu currently has the 'show' class
-            const openDropdowns = navbar.querySelectorAll('.dropdown-menu.show');
-            if (openDropdowns.length === 0) {
+            if (!navbar.querySelector('.dropdown-menu.show')) {
                 body.classList.remove('has-navbar-overlay');
             }
         }, 50);
+    });
+
+    // Close on overlay click
+    overlay.addEventListener('click', () => {
+        const openDropdowns = navbar.querySelectorAll('.dropdown-toggle.show');
+        openDropdowns.forEach(toggle => {
+            const instance = bootstrap.Dropdown.getOrCreateInstance(toggle);
+            if (instance) instance.hide();
+        });
+
+        // Also close mobile menu if open
+        const navbarCollapse = navbar.querySelector('.navbar-collapse.show');
+        if (navbarCollapse) {
+            const collapseInstance = bootstrap.Collapse.getOrCreateInstance(navbarCollapse);
+            if (collapseInstance) collapseInstance.hide();
+        }
     });
 };
 
@@ -346,12 +363,15 @@ const initNavbarOverlay = () => {
  */
 if (window.acf) {
     window.acf.addAction('render_block_preview', function ($block) {
-        // Run specific dispatcher for this block
-        initBlocks($block[0]);
+        initBlocks($block[0], () => {
+            if (window.AOS) AOS.refresh();
+        });
 
-        // Refresh global utilities
-        AOS.init();
-        AOS.refresh();
+        // Initialize/Refresh global utilities
+        if (typeof AOS !== 'undefined') {
+            AOS.init();
+            AOS.refresh();
+        }
     });
 }
 
@@ -439,5 +459,50 @@ const initFaqBlock = (element) => {
                 }
             });
         });
+    });
+};
+
+/**
+ * Initialize Navbar Search Logic
+ */
+const initNavbarSearch = () => {
+    const trigger = document.querySelector('.js-search-trigger');
+    const searchBar = document.querySelector('.js-navbar-search');
+    const closeBtn = document.querySelector('.js-search-close');
+    const inputField = document.querySelector('#navbar-search-input');
+
+    if (!trigger || !searchBar) return;
+
+    const openSearch = (e) => {
+        if (e) e.preventDefault();
+        searchBar.classList.add('active');
+        document.body.classList.add('has-search-active');
+        setTimeout(() => {
+            if (inputField) inputField.focus();
+        }, 300);
+    };
+
+    const closeSearch = (e) => {
+        if (e) e.preventDefault();
+        searchBar.classList.remove('active');
+        document.body.classList.remove('has-search-active');
+        if (inputField) inputField.value = '';
+    };
+
+    trigger.addEventListener('click', openSearch);
+    if (closeBtn) closeBtn.addEventListener('click', closeSearch);
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchBar.classList.contains('active')) {
+            closeSearch();
+        }
+    });
+
+    // Close if clicking outside the search bar but not the trigger itself (Desktop & Overlay)
+    document.addEventListener('click', (e) => {
+        if (searchBar.classList.contains('active') && !searchBar.contains(e.target) && !trigger.contains(e.target)) {
+            closeSearch();
+        }
     });
 };

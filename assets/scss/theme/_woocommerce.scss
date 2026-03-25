@@ -53,8 +53,6 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
-        // Remove the 1400px override as we want 4 columns earlier
-
         &::before,
         &::after {
             display: none; // Remove legacy float cleared pseudo elements

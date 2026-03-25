@@ -30,13 +30,13 @@ $layouts = [
                 'col_content' => $content_width . ' order-2 order-lg-1 text-start align-items-start',
                 'col_image'   => 'col-lg-6 order-1 order-lg-2 text-center text-lg-end',
                 'justify'     => 'justify-content-start',
-                'img_style'   => 'max-width: 500px; aspect-ratio: 3/4;'
+                'img_style'   => 'max-width: 600px; aspect-ratio: 3/4;'
         ],
         'omgedraaid' => [
                 'col_content' => $content_width . ' order-2 order-lg-2 text-end align-items-end',
                 'col_image'   => 'col-lg-6 order-1 order-lg-1 text-center text-lg-start',
                 'justify'     => 'justify-content-end',
-                'img_style'   => 'max-width: 500px; aspect-ratio: 3/4;'
+                'img_style'   => 'max-width: 600px; aspect-ratio: 3/4;'
         ],
         'center' => [
                 'col_content' => 'col-lg-8 offset-lg-2 order-1 text-center align-items-center',
@@ -72,9 +72,15 @@ $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: ce
                             <div class="position-relative d-inline-block w-100 rounded-3 overflow-hidden shadow-sm" style="<?= $conf['img_style']; ?>" data-aos="fade-in">
                                 <div class="swiper js-hero-swiper heroCarouselSwiper-<?= esc_attr($block['id']); ?> w-100 h-100">
                                     <div class="swiper-wrapper">
-                                        <?php foreach ($gallery as $image) : ?>
+                                        <?php foreach ($gallery as $index => $image) : ?>
                                             <div class="swiper-slide overflow-hidden">
-                                                <img src="<?= esc_url($image['sizes']['large']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
+                                                <?php 
+                                                echo wp_get_attachment_image( $image['ID'], 'large', false, [
+                                                    'class' => 'w-100 h-100 object-fit-cover',
+                                                    'decoding' => 'async',
+                                                    'loading' => $index === 0 ? 'eager' : 'lazy'
+                                                ] ); 
+                                                ?>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
@@ -100,10 +106,16 @@ $style_attr = $is_split ? '' : 'min-height: 80vh; display: flex; align-items: ce
             <?php if ($gallery): ?>
                 <div class="swiper js-hero-swiper heroCarouselSwiper-<?= esc_attr($block['id']); ?> position-absolute top-0 start-0 w-100 h-100" style="z-index:1;">
                     <div class="swiper-wrapper">
-                        <?php foreach ($gallery as $image) : ?>
+                        <?php foreach ($gallery as $index => $image) : ?>
                             <div class="swiper-slide overflow-hidden">
                                 <div class="w-100 h-100 bg-dark position-absolute top-0 start-0" style="opacity: 0.5; z-index: 2;"></div>
-                                <img src="<?= esc_url($image['sizes']['max']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-100 h-100 object-fit-cover"/>
+                                <?php 
+                                echo wp_get_attachment_image( $image['ID'], 'max', false, [
+                                    'class' => 'w-100 h-100 object-fit-cover',
+                                    'decoding' => 'async',
+                                    'loading' => $index === 0 ? 'eager' : 'lazy'
+                                ] ); 
+                                ?>
                             </div>
                         <?php endforeach; ?>
                     </div>

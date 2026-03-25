@@ -141,6 +141,15 @@ function include_header_styles()
 if (!is_admin()) {
     add_action('wp_enqueue_scripts', 'include_scripts');
     add_action('wp_enqueue_scripts', 'include_header_styles');
+
+    // Add defer attribute to scripts
+    add_filter('script_loader_tag', function($tag, $handle) {
+        $defer_scripts = ['bootstrap', 'swiper', 'aos', 'pixel-flow-app'];
+        if (in_array($handle, $defer_scripts)) {
+            return str_replace(' src', ' defer src', $tag);
+        }
+        return $tag;
+    }, 10, 2);
 }
 
 /**

@@ -1,3 +1,4 @@
+@import "_common-vars";
 .heading {
     position: relative;
     padding: 4rem 0;
@@ -8,7 +9,6 @@
     // Scoping properly inside the block
 
     &__content {
-        max-width: 800px;
         margin: 0 auto; // Keeps it centered in container, but content can be left/right
         // text-align: center; // REMOVED: Managed by utility class (text-start, text-center, text-end)
         z-index: 2;
@@ -19,7 +19,6 @@
         display: block;
         font-size: 0.875rem;
         text-transform: uppercase;
-        letter-spacing: 2px;
         font-weight: 700;
         margin-bottom: 1rem;
         // Color handled by utility class (e.g. text-primary)
@@ -56,7 +55,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.6);
         z-index: 1;
 
         // If inside container with rounded corners, respect that

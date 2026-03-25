@@ -109,14 +109,20 @@ $query = new WP_Query( $args );
 							$thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
 							$categories = get_the_terms( get_the_ID(), 'category' );
 							$cat_name = !empty($categories) ? $categories[0]->name : '';
-							$location = get_field('location'); // Example meta
+							$location = get_field('location');
 						?>
 							<div class="swiper-slide h-auto">
 								<div class="card h-100 bg-transparent border-0">
 									<!-- Image Wrapper -->
 									<div class="position-relative rounded-3 overflow-hidden mb-4" style="aspect-ratio: 4/3;">
-										<?php if ( $thumb_url ) : ?>
-											<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php the_title_attribute(); ?>" class="w-100 h-100 object-fit-cover transition-transform duration-500 hover-scale">
+										<?php if ( has_post_thumbnail() ) : ?>
+											<?php 
+                                            the_post_thumbnail( 'large', [
+                                                'class' => 'w-100 h-100 object-fit-cover transition-transform duration-500 hover-scale',
+                                                'decoding' => 'async',
+                                                'loading' => 'lazy'
+                                            ] ); 
+                                            ?>
 										<?php else : ?>
 											<div class="w-100 h-100 bg-secondary d-flex align-items-center justify-content-center">
 												<span class="<?php echo esc_attr($text_muted); ?>"><i class="fa-solid fa-image fa-2xl"></i></span>

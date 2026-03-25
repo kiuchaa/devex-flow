@@ -475,9 +475,83 @@
             "endpoint": 0
         },
         {
+            "key": "field_699ef859c51e5",
+            "label": "Navigatiebalk uiterlijk",
+            "name": "navigatiebalk_uiterlijk",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "row",
+            "sub_fields": [
+                {
+                    "key": "field_699ef859c51f2",
+                    "label": "Achtergrondkleur",
+                    "name": "achtergrondkleur",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "primary": "Primair",
+                        "secondary": "Secondaire",
+                        "tertiary": "Tertiare",
+                        "info": "Uniek (info)",
+                        "white": "Wit",
+                        "black": "Zwart"
+                    },
+                    "default_value": "white",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "allow_in_bindings": 1,
+                    "layout": "horizontal"
+                },
+                {
+                    "key": "field_699ef859c51f3",
+                    "label": "Accent kleur",
+                    "name": "accent_kleur",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "primary": "Primair",
+                        "secondary": "Secondaire",
+                        "tertiary": "Tertiare",
+                        "info": "Uniek (info)",
+                        "white": "Wit",
+                        "black": "Zwart"
+                    },
+                    "default_value": "primary",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "allow_in_bindings": 1,
+                    "layout": "horizontal"
+                }
+            ]
+        },
+        {
             "key": "field_699ee845ed4b7",
-            "label": "Navigatiebalk instellingen",
-            "name": "navigatiebalk_instellingen",
+            "label": "Navigatiebalk rechts",
+            "name": "navigatiebalk_rechts",
             "aria-label": "",
             "type": "group",
             "instructions": "",
@@ -492,8 +566,8 @@
             "sub_fields": [
                 {
                     "key": "field_699ee851ed4b8",
-                    "label": "Shop icoon",
-                    "name": "shop_icoon",
+                    "label": "Shop icoon tonen",
+                    "name": "shop_icoon_tonen",
                     "aria-label": "",
                     "type": "true_false",
                     "instructions": "",
@@ -520,9 +594,47 @@
                     "ui_off_text": ""
                 },
                 {
+                    "key": "field_699ef7a34e1dc",
+                    "label": "Shop icoon",
+                    "name": "shop_icoon",
+                    "aria-label": "",
+                    "type": "font-awesome",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_699ee851ed4b8",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "icon_sets": [
+                        "classic_solid",
+                        "classic_regular",
+                        "brands"
+                    ],
+                    "custom_icon_set": "",
+                    "default_label": "",
+                    "default_value": "",
+                    "save_format": "element",
+                    "allow_null": 0,
+                    "show_preview": 1,
+                    "enqueue_fa": 0,
+                    "allow_in_bindings": 0,
+                    "fa_live_preview": "",
+                    "choices": []
+                },
+                {
                     "key": "field_699ee86fed4b9",
-                    "label": "Winkelwagen icoon",
-                    "name": "winkelwagen_icoon",
+                    "label": "Winkelwagen icoon tonen",
+                    "name": "winkelwagen_icoon_tonen",
                     "aria-label": "",
                     "type": "true_false",
                     "instructions": "",
@@ -549,9 +661,47 @@
                     "ui_off_text": ""
                 },
                 {
+                    "key": "field_699ef7fb4e1de",
+                    "label": "Winkelwagen icoon",
+                    "name": "winkelwagen_icoon",
+                    "aria-label": "",
+                    "type": "font-awesome",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_699ee86fed4b9",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "icon_sets": [
+                        "classic_solid",
+                        "classic_regular",
+                        "brands"
+                    ],
+                    "custom_icon_set": "",
+                    "default_label": "",
+                    "default_value": "",
+                    "save_format": "element",
+                    "allow_null": 0,
+                    "show_preview": 1,
+                    "enqueue_fa": 0,
+                    "allow_in_bindings": 0,
+                    "fa_live_preview": "",
+                    "choices": []
+                },
+                {
                     "key": "field_699ee89ded4ba",
-                    "label": "Account icoon",
-                    "name": "account_icoon",
+                    "label": "Account icoon tonen",
+                    "name": "account_icoon_tonen",
                     "aria-label": "",
                     "type": "true_false",
                     "instructions": "",
@@ -578,38 +728,49 @@
                     "ui_off_text": ""
                 },
                 {
-                    "key": "field_699ee8aed4bb",
-                    "label": "Achtergrondkleur",
-                    "name": "achtergrondkleur",
+                    "key": "field_699ef8194e1df",
+                    "label": "Account icoon",
+                    "name": "account_icoon",
                     "aria-label": "",
-                    "type": "button_group",
+                    "type": "font-awesome",
                     "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_699ee89ded4ba",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-                        "primary": "Primair",
-                        "secondary": "Secondaire",
-                        "tertiary": "Tertiare",
-                        "info": "Uniek (info)",
-                        "white": "Wit",
-                        "black": "Zwart"
-                    },
-                    "default_value": "white",
-                    "return_format": "value",
+                    "icon_sets": [
+                        "classic_solid",
+                        "classic_regular",
+                        "brands"
+                    ],
+                    "custom_icon_set": "",
+                    "default_label": "",
+                    "default_value": "",
+                    "save_format": "element",
                     "allow_null": 0,
-                    "layout": "horizontal"
+                    "show_preview": 1,
+                    "enqueue_fa": 0,
+                    "allow_in_bindings": 0,
+                    "fa_live_preview": "",
+                    "choices": []
                 },
                 {
-                    "key": "field_699ee8bad4bc",
-                    "label": "Accent kleur",
-                    "name": "accent_kleur",
+                    "key": "field_699ef95db4732",
+                    "label": "Knop",
+                    "name": "knop",
                     "aria-label": "",
-                    "type": "button_group",
+                    "type": "link",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -618,18 +779,8 @@
                         "class": "",
                         "id": ""
                     },
-                    "choices": {
-                        "primary": "Primair",
-                        "secondary": "Secondaire",
-                        "tertiary": "Tertiare",
-                        "info": "Uniek (info)",
-                        "white": "Wit",
-                        "black": "Zwart"
-                    },
-                    "default_value": "primary",
-                    "return_format": "value",
-                    "allow_null": 0,
-                    "layout": "horizontal"
+                    "return_format": "array",
+                    "allow_in_bindings": 0
                 }
             ]
         },
@@ -817,5 +968,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772022278
+    "modified": 1772026458
 }

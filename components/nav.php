@@ -72,6 +72,9 @@ $nav_accent = $nav_style['accent_kleur'];
                             <?= $nav_right['account_icoon'] ?>
                         </a>
                     <?php endif; ?>
+                    <a href="#" class="nav-icon-link js-search-trigger me-3" aria-label="Zoeken">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
                 <?php endif; ?>
 
                 <?php
@@ -88,6 +91,16 @@ $nav_accent = $nav_style['accent_kleur'];
                 }
                 ?>
             </div>
+        </div>
+    </div>
+
+    <div class="navbar-search js-navbar-search">
+        <div class="container d-flex align-items-center h-100">
+            <form role="search" method="get" class="search-form w-100 d-flex align-items-center" action="<?php echo esc_url(home_url('/')); ?>">
+                <i class="fa-solid fa-magnifying-glass search-icon me-3"></i>
+                <input type="search" id="navbar-search-input" class="search-field form-control bg-transparent border-0 shadow-none ps-0" placeholder="Waar ben je naar op zoek?" value="" name="s" autocomplete="off">
+                <button type="button" class="btn-close py-0 js-search-close" aria-label="Sluiten"></button>
+            </form>
         </div>
     </div>
 </nav>
