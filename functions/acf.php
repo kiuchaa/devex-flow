@@ -34,133 +34,102 @@ function pixel_flow_allowed_block_types( $allowed_block_types, $editor_context )
 
 // Register blocks
 function register_pixel_flow_blocks() {
-	if ( function_exists('acf_register_block_type') ) {
+	if ( ! function_exists('acf_register_block_type') ) {
+		return;
+	}
 
-		// Text & Image Block
-		acf_register_block_type([
-			'name'            => 'text-media',
-			'title'           => __( 'Tekst & Beeld', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/text-media.php',
-			'category'        => 'custom_blocks',
-			'icon'            => 'align-pull-left',
-			'keywords'        => [ 'text', 'media' ],
-			'mode'            => 'edit',
-			'supports'        => [
-				'align'  => false,
-				'mode'   => false,
-			]
-		]);
+	// Specific settings for known blocks (titles, icons, keywords)
+	$pixel_flow_blocks = [
+		'text-media' => [
+			'title'    => __( 'Tekst & beeld', 'pixel-flow' ),
+			'icon'     => 'align-pull-left',
+			'keywords' => [ 'text', 'media' ],
+		],
+		'hero-carousel' => [
+			'title'    => __( 'Hero carousel', 'pixel-flow' ),
+			'icon'     => 'images-alt2',
+			'keywords' => [ 'hero', 'carousel', 'slider' ],
+		],
+		'post-type-carousel' => [
+			'title'    => __( 'Post type carousel', 'pixel-flow' ),
+			'icon'     => 'slides',
+			'keywords' => [ 'carousel', 'posts', 'slider', 'agenda' ],
+		],
+        'post-type-grid' => [
+            'title'    => __( 'Post type grid', 'pixel-flow' ),
+            'icon'     => 'email-alt',
+            'keywords' => [ 'post type', 'grid', 'post' ],
+        ],
+		'unique-selling-points' => [
+			'title'    => __( 'Unique selling points', 'pixel-flow' ),
+			'icon'     => 'list-view',
+			'keywords' => [ 'usp', 'features', 'columns' ],
+		],
+		'video-block' => [
+			'title'    => __( 'Video blok', 'pixel-flow' ),
+			'icon'     => 'video-alt3',
+			'keywords' => [ 'video', 'embed', 'player' ],
+		],
+		'faq' => [
+			'title'    => __( 'Veelgestelde vragen blok', 'pixel-flow' ),
+			'icon'     => 'list-view',
+			'keywords' => [ 'faq', 'accordion', 'questions' ],
+		],
+		'heading' => [
+			'title'    => __( 'Kop tekst', 'pixel-flow' ),
+			'icon'     => 'heading',
+			'keywords' => [ 'heading', 'title', 'header' ],
+		],
+		'form' => [
+			'title'    => __( 'Formulier', 'pixel-flow' ),
+			'icon'     => 'email-alt',
+			'keywords' => [ 'formulier', 'contact', 'ninja forms', 'form' ],
+		],
+		'text-columns' => [
+			'title'    => __( 'Tekst kolommen', 'pixel-flow' ),
+			'icon'     => 'email-alt',
+			'keywords' => [ 'tekst', 'kolommen', 'columns' ],
+		],
+		'call-to-action' => [
+			'title'    => __( 'Call to action', 'pixel-flow' ),
+			'icon'     => 'megaphone',
+			'keywords' => [ 'call to action', 'cta', 'actie' ],
+		],
+	];
 
-		// Hero Carousel Block
-		acf_register_block_type([
-			'name'            => 'hero-carousel',
-			'title'           => __( 'Hero Carousel', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/hero-carousel.php',
-			'category'        => 'custom_blocks',
-			'icon'            => 'images-alt2',
-			'keywords'        => [ 'hero', 'carousel', 'slider' ],
-			'mode'            => 'edit',
-			'supports'        => [
-				'align'  => false,
-				'mode'   => false,
-			]
-		]);
+	// Auto-discover all blocks in the acf-blocks directory
+	$block_files = glob( get_template_directory() . '/acf-blocks/*.php' );
+	
+	if ( ! $block_files ) {
+		return;
+	}
 
-		// Post Type Carousel Block
-		acf_register_block_type([
-			'name'            => 'post-type-carousel',
-			'title'           => __( 'Post Type Carousel', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/post-type-carousel.php',
-			'category'        => 'custom_blocks',
-			'icon'            => 'slides',
-			'keywords'        => [ 'carousel', 'posts', 'slider', 'agenda' ],
-			'mode'            => 'edit',
-			'supports'        => [
-				'align'  => false,
-				'mode'   => false,
-				'anchor' => true,
-			]
-		]);
-		// Unique Selling Points Block
-		acf_register_block_type([
-			'name'            => 'unique-selling-points',
-			'title'           => __( 'Unique Selling Points', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/unique_selling_points.php',
-			'category'        => 'custom_blocks',
-			'icon'            => 'list-view',
-			'keywords'        => [ 'usp', 'features', 'columns' ],
-			'mode'            => 'edit',
-			'supports'        => [
-				'align'  => false,
-				'mode'   => false,
-				'anchor' => true,
-			]
-		]);
+	foreach ( $block_files as $file ) {
+		$slug = basename( $file, '.php' );
+		$settings = isset( $pixel_flow_blocks[ $slug ] ) ? $pixel_flow_blocks[ $slug ] : [];
+		
+		$settings['name']            = $slug;
+		$settings['title']           = $settings['title'] ?? ucfirst( str_replace( '-', ' ', $slug ) );
+		$settings['api_version']     = 3;
+		$settings['render_template'] = "acf-blocks/{$slug}.php";
+		$settings['category']        = 'custom_blocks';
+		$settings['icon']            = $settings['icon'] ?? 'block-default';
+		$settings['mode']            = $settings['mode'] ?? 'edit';
+		
+		// Map supports
+		$settings['supports']        = wp_parse_args( $settings['supports'] ?? [], [
+			'align'  => false,
+			'mode'   => false,
+			'anchor' => true,
+		] );
 
-		// Video Block
-		acf_register_block_type([
-			'name'            => 'video-block',
-			'title'           => __( 'Video Blok', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/video_block.php',
-			'category'        => 'custom_blocks',
-			'icon'            => 'video-alt3',
-			'keywords'        => [ 'video', 'embed', 'player' ],
-			'mode'            => 'edit',
-			'supports'        => [
-				'align'  => false,
-				'mode'   => false,
-				'anchor' => true,
-			]
-		]);
+		// Enhancement 2: Block-Specific Asset Loading
+		$css_path = "/assets/css/blocks/{$slug}.css";
+		if ( file_exists( get_template_directory() . $css_path ) ) {
+			$settings['enqueue_style'] = get_template_directory_uri() . $css_path . '?v=' . filemtime( get_template_directory() . $css_path );
+		}
 
-		// FAQ Block
-		acf_register_block_type([
-			'name'            => 'faq-block',
-			'title'           => __( 'FAQ Blok', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/faq-block.php',
-			'category'        => 'custom_blocks',
-			'icon'            => 'list-view',
-			'keywords'        => [ 'faq', 'accordion', 'questions' ],
-			'mode'            => 'edit',
-			'supports'        => [
-				'align'  => false,
-				'mode'   => false,
-				'anchor' => true,
-			]
-		]);
-
-		// Heading Block
-		acf_register_block_type([
-			'name'            => 'heading',
-			'title'           => __( 'Kop', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/heading.php',
-			'category'        => 'custom_blocks',
-			'icon'            => 'heading',
-			'keywords'        => [ 'heading', 'title', 'header' ],
-			'mode'            => 'edit',
-			'supports'        => [
-				'align'  => false,
-				'mode'   => false,
-				'anchor' => true,
-			]
-		]);
-
-		// Formulier Block
-		acf_register_block_type([
-			'name'            => 'formulier',
-			'title'           => __( 'Formulier', 'pixel-flow' ),
-			'render_template' => 'acf-blocks/formulier.php',
-			'category'        => 'custom_blocks',
-			'icon'            => 'email-alt',
-			'keywords'        => [ 'formulier', 'contact', 'ninja forms', 'form' ],
-			'mode'            => 'edit',
-			'supports'        => [
-				'align'  => false,
-				'mode'   => false,
-				'anchor' => true,
-			]
-		]);
-
+		acf_register_block_type( $settings );
 	}
 }
 add_action( 'acf/init', 'register_pixel_flow_blocks' );

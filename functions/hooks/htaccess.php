@@ -60,13 +60,21 @@ AddType image/svg+xml .svg
     ExpiresByType application/font-woff2  "access plus 1 year"
     
     # CSS, JavaScript
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType text/javascript "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType application/x-javascript "access plus 1 year"
     
     # Others
     ExpiresByType application/pdf "access plus 1 month"
     ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
+</IfModule>
+
+# Browser Caching via Cache-Control Header
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|js|css|swf|x-html|php|svg)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
 </IfModule>
 EOD;
     return $rules . $new_rules;

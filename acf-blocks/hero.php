@@ -67,9 +67,14 @@ if ( ! empty( $block['className'] ) ) {
             <div class="col-lg-6 order-1 order-lg-2 text-center text-lg-end">
                 <?php if ( $image ) : ?>
                     <div class="position-relative d-inline-block" data-aos="fade-in" data-aos-duration="2000" data-aos-delay="550">
-                        <img src="<?php echo esc_url( $image['url'] ); ?>"
-                             alt="<?php echo esc_attr( $image['alt'] ); ?>"
-                             class="img-fluid object-fit-cover header-hero-image"/>
+                        <?php 
+                        echo wp_get_attachment_image( $image['ID'], 'large', false, [
+                            'class' => 'img-fluid object-fit-cover header-hero-image',
+                            'decoding' => 'async',
+                            'loading' => 'eager',
+                            'fetchpriority' => 'high'
+                        ] ); 
+                        ?>
                     </div>
                 <?php endif; ?>
             </div>

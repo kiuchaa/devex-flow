@@ -1,0 +1,30 @@
+@import "_common-vars";
+
+.post-type-grid {
+    &__card {
+        .hover-scale {
+            transition: transform 0.5s ease;
+        }
+
+        .hover-translate {
+            transition: transform 0.3s ease;
+        }
+
+        &:hover {
+            .hover-scale {
+                transform: scale(1.05);
+            }
+
+            .hover-translate {
+                transform: translateX(4px);
+            }
+        }
+
+        .clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+}

@@ -43,4 +43,4 @@ Text Domain: pixel-flow
 // 4. Local Theme Stylesheets
 @import "assets/scss/theme/theme";
 @import "assets/scss/components/components";
-@import "assets/scss/blocks/**/*.scss";
+// Block styles are now loaded selectively based on the blocks present on the page.

@@ -26,8 +26,9 @@ $image      = $content_group['background_image'] ?? '';
 $use_bg_image = $options_group['use_background_image'] ?? false;
 $bg_color     = $options_group['background_color'] ?? 'white';
 $icon_color   = $options_group['accent_kleur'] ?? 'black';
-$width        = $options_group['width'] ?? 'container';
+$bg_imag_width        = $options_group['image_width'] ?? 'container';
 $text_align   = $options_group['text_alignment'] ?? 'text-center'; // Default center
+$text_width   = $options_group['text_width'] ?? 'col-lg-12';
 
 // Initialize styles
 $section_style = '';
@@ -37,7 +38,7 @@ $overlay_class = '';
 if ( $use_bg_image && !empty($image) ) {
     $bg_url = esc_url($image['url']);
     
-    if ($width === 'container') {
+    if ($bg_imag_width === 'container') {
         // Apply background to the inner container
         $container_style = 'style="background-image: url(' . $bg_url . ');"';
         $class_name .= ' heading--container-bg';
@@ -76,16 +77,16 @@ if ($text_align === 'text-start') {
 ?>
 
 <section class="<?php echo esc_attr( $class_name ); ?>" <?php echo $final_section_style; ?>>
-    <?php if ( $use_bg_image && $width === 'full-width' ) : ?>
+    <?php if ( $use_bg_image && $bg_imag_width === 'full-width' ) : ?>
         <div class="<?php echo $overlay_class; ?>"></div>
     <?php endif; ?>
 
     <div class="container heading__container" <?php echo $container_style; ?>>
-        <?php if ( $use_bg_image && $width === 'container' ) : ?>
+        <?php if ( $use_bg_image && $bg_imag_width === 'container' ) : ?>
             <div class="<?php echo $overlay_class; ?>"></div>
         <?php endif; ?>
 
-        <div class="heading__content <?php echo esc_attr( $text_align ); ?>">
+        <div class="heading__content col-12 <?= $text_width ?> <?php echo esc_attr( $text_align ); ?>">
             <?php if ( $mini_title ) : ?>
                 <span class="heading__mini-title text-<?php echo esc_attr($icon_color); ?>">
                     <?php echo esc_html( $mini_title ); ?>

@@ -5,7 +5,7 @@
  * @package pixel-flow
  */
 
-$block_id = 'text-image-' . $block['id'];
+$block_id = 'text-media-' . $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
@@ -48,7 +48,7 @@ $content_order = ( $orientation === 'right' ) ? 'order-2 order-lg-1' : 'order-2 
 $image_order   = ( $orientation === 'right' ) ? 'order-1 order-lg-2' : 'order-1 order-lg-1';
 ?>
 
-<section id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( $wrapper_class ); ?>" data-pf-block="text-image">
+<section id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( $wrapper_class ); ?>" data-pf-block="text-media">
 	<div class="container">
 		<div class="row align-items-center gy-5 gx-0 gx-md-5">
 			<div class="col-lg-6 <?php echo esc_attr( $content_order ); ?>">
@@ -104,9 +104,13 @@ $image_order   = ( $orientation === 'right' ) ? 'order-1 order-lg-2' : 'order-1 
 			<div class="col-lg-6 <?php echo esc_attr( $image_order ); ?>">
 				<?php if ( $media_type == 'image' && $image ) : ?>
 					<div class="b-text-image__media-wrapper b-text-image__media-wrapper--image ratio <?php echo esc_attr( $ratio_class ); ?>">
-						<img src="<?php echo esc_url( $image['url'] ); ?>" 
-							 alt="<?php echo esc_attr( $image['alt'] ); ?>" 
-							 class="object-fit-cover rounded-3 shadow w-100 h-100">
+						<?php 
+                        echo wp_get_attachment_image( $image['ID'], 'large', false, [
+                            'class' => 'object-fit-cover rounded-3 shadow w-100 h-100',
+                            'decoding' => 'async',
+                            'loading' => 'lazy'
+                        ] ); 
+                        ?>
 					</div>
                 <?php elseif ( $media_type === 'video' && $video ) : ?>
                     <div class="b-text-image__media-wrapper b-text-image__media-wrapper--video position-relative rounded-3 shadow overflow-hidden ratio <?php echo esc_attr( $ratio_class ); ?>">

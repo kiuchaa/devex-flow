@@ -20,10 +20,6 @@
         transition: transform 10s ease-out;
     }
 
-    &:hover .contact-header-image {
-        transform: scale(1.1);
-    }
-
     .contact-header-overlay {
         position: absolute;
         top: 0;
