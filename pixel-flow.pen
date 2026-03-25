@@ -1,0 +1,250 @@
+{
+  "version": "2.9",
+  "children": [
+    {
+      "type": "frame",
+      "id": "P2AGg",
+      "x": 899,
+      "y": 0,
+      "name": "Document Cover",
+      "clip": true,
+      "width": 595,
+      "height": 842,
+      "fill": "#19A362",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "kMRQh",
+          "x": -100,
+          "y": -100,
+          "name": "circle1",
+          "fill": "#22B16F66",
+          "width": 400,
+          "height": 400
+        },
+        {
+          "type": "ellipse",
+          "id": "BQ8NH",
+          "x": 250,
+          "y": 400,
+          "name": "circle2",
+          "fill": "#13854E66",
+          "width": 350,
+          "height": 350
+        },
+        {
+          "type": "ellipse",
+          "id": "tkgJj",
+          "x": -150,
+          "y": 600,
+          "name": "circle3",
+          "fill": "#22B16F66",
+          "width": 300,
+          "height": 300
+        },
+        {
+          "type": "frame",
+          "id": "rnxBW",
+          "x": 60,
+          "y": 80,
+          "name": "title_container",
+          "width": 400,
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "text",
+              "id": "K9HRk",
+              "name": "title1",
+              "fill": "#FFFFFF",
+              "textGrowth": "fixed-width",
+              "width": 369,
+              "content": "Technische Ontwerp",
+              "lineHeight": 1.2,
+              "fontFamily": "Questrial",
+              "fontSize": 35,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "X8DBW",
+              "name": "title2",
+              "fill": "#FFFFFF",
+              "content": "Pixel-Flow",
+              "lineHeight": 1.1,
+              "fontFamily": "Outfit",
+              "fontSize": 72,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "jWHkm",
+          "x": 60,
+          "y": 327,
+          "name": "subtitle",
+          "fill": "#FFFFFF",
+          "textGrowth": "fixed-width-height",
+          "width": 258,
+          "height": 227,
+          "content": "Pixel-Flow is een schaalbaar en herbruikbaar WordPress \"in-house\" basisthema, ontworpen voor efficiëntere workflows en consistente weboplevering.",
+          "lineHeight": 1.5,
+          "fontFamily": "Inter",
+          "fontSize": 18,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "DGmD0",
+          "x": 60,
+          "y": 660,
+          "name": "metadata",
+          "layout": "vertical",
+          "gap": 32,
+          "children": [
+            {
+              "type": "frame",
+              "id": "qkUrK",
+              "name": "metaRow1",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "lpjrd",
+                  "name": "label1",
+                  "fill": "#FFFFFF",
+                  "content": "Datum:",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "Bold"
+                },
+                {
+                  "type": "text",
+                  "id": "mWW4A",
+                  "name": "value1",
+                  "fill": "#FFFFFF",
+                  "textGrowth": "fixed-width",
+                  "width": 113,
+                  "content": "20 maart 2026",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "agHOF",
+              "name": "metaRow2",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "k0M37",
+                  "name": "label2",
+                  "fill": "#FFFFFF",
+                  "content": "Auteur:",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "Bold"
+                },
+                {
+                  "type": "text",
+                  "id": "5w2xf",
+                  "name": "value2",
+                  "fill": "#FFFFFF",
+                  "content": "Jacky Liu, developer",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ellipse",
+          "id": "5Ajes",
+          "x": 327,
+          "y": 200,
+          "name": "Featured Photo",
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "./pexels-djordje-petrovic-590080-2102416.jpg",
+            "mode": "fill"
+          },
+          "width": 503,
+          "height": 480
+        },
+        {
+          "type": "frame",
+          "id": "clT3Y",
+          "x": 0,
+          "y": 0,
+          "name": "Texture Overlay",
+          "enabled": false,
+          "opacity": 0.05,
+          "width": 595,
+          "height": 842,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "./images/generated-1774017994953.png",
+            "mode": "fill"
+          },
+          "children": [
+            {
+              "type": "text",
+              "id": "i43oM",
+              "fill": "#000000",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qHWmC",
+          "x": 60,
+          "y": 630,
+          "name": "accentLine",
+          "width": 40,
+          "height": 3,
+          "fill": "#FFFFFF"
+        },
+        {
+          "type": "line",
+          "id": "NezUz",
+          "x": 60,
+          "y": 630,
+          "name": "accent1",
+          "width": 40,
+          "height": 2,
+          "stroke": {
+            "thickness": 2,
+            "fill": "#FFFFFF"
+          }
+        },
+        {
+          "type": "rectangle",
+          "id": "mzx0t",
+          "x": 495,
+          "y": 760,
+          "fill": {
+            "type": "image",
+            "enabled": true,
+            "url": "./image.png",
+            "mode": "fill"
+          },
+          "width": 100,
+          "height": 76
+        }
+      ]
+    }
+  ]
+}
