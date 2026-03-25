@@ -172,3 +172,4 @@ Elke installatie gebruikt twee libraries in `/libs/`:
 ```
 
 **28-01-2026**: als `install-required-plugins` een API fout geeft bij het installeren, check dan `auto-install-plugin.php` en verifieer of de slug overeenkomt met de WordPress store voor elk plugin.
+**25-03-2026**: heb je 'ghosting ACF components' in de Gutenberg Editor? Dan is de kans groot dat je verouderde bestanden in het acf-blocks/ of acf-json/ dir hebt staan.

@@ -548,7 +548,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/faq-block"
+                "value": "acf\/faq"
             }
         ]
     ],
@@ -562,5 +562,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1773219255
+    "modified": 1774430838
 }
